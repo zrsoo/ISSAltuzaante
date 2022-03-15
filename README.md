@@ -7,7 +7,7 @@ This System will keep track of information for each student starting with the fi
 Each faculty may have different specializations both for the undergraduate and master degrees; a student is enrolled in one of these.
 Each faculty year will have a contract of studies, a curriculum (list of mandatory disciplines + 1 optional discipline).
 
-#Front-End set-up
+# Front-End set-up
   - Install node.js from https://nodejs.org/en/
   - Install a suitable IDE: VSCode/Atom
   - Clone this repository and open the AcademicInfo-frontend/academic-info project.
