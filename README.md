@@ -8,8 +8,8 @@ Each faculty may have different specializations both for the undergraduate and m
 Each faculty year will have a contract of studies, a curriculum (list of mandatory disciplines + 1 optional discipline).
 
 #Front-End set-up
-  -> Install node.js from https://nodejs.org/en/
-  -> Install a suitable IDE: VSCode/Atom
-  -> Clone this repository and open the AcademicInfo-frontend/academic-info project.
-  -> To install dependencies needed, open a terminal and run the command: npm install (not mandatory for first version of the project)
-  -> To run the front-end app, run the command: npm install
+  - Install node.js from https://nodejs.org/en/
+  - Install a suitable IDE: VSCode/Atom
+  - Clone this repository and open the AcademicInfo-frontend/academic-info project.
+  - To install dependencies needed, open a terminal and run the command: npm install (not mandatory for first version of the project)
+  - To run the front-end app, run the command: npm install
