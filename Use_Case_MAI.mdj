@@ -12749,6 +12749,101 @@
 							"headQualifiersCompartment": {
 								"$ref": "AAAAAAF/enZmpK4TxjQ="
 							}
+						},
+						{
+							"_type": "UMLIncludeView",
+							"_id": "AAAAAAF/jLn5n5RLgeU=",
+							"_parent": {
+								"$ref": "AAAAAAF/ejZJxpdNjqM="
+							},
+							"model": {
+								"$ref": "AAAAAAF/jLn5npRJmGM="
+							},
+							"subViews": [
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAF/jLn5oJRMego=",
+									"_parent": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"model": {
+										"$ref": "AAAAAAF/jLn5npRJmGM="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": 641,
+									"top": 728,
+									"height": 13,
+									"alpha": 1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"edgePosition": 1
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAF/jLn5oJRNX84=",
+									"_parent": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"model": {
+										"$ref": "AAAAAAF/jLn5npRJmGM="
+									},
+									"font": "Arial;13;0",
+									"left": 629,
+									"top": 729,
+									"width": 55.65625,
+									"height": 13,
+									"alpha": 1.5707963267948966,
+									"distance": 30,
+									"hostEdge": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"edgePosition": 1,
+									"text": "«include»"
+								},
+								{
+									"_type": "EdgeLabelView",
+									"_id": "AAAAAAF/jLn5oJRO654=",
+									"_parent": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"model": {
+										"$ref": "AAAAAAF/jLn5npRJmGM="
+									},
+									"visible": false,
+									"font": "Arial;13;0",
+									"left": 612,
+									"top": 725,
+									"height": 13,
+									"alpha": -1.5707963267948966,
+									"distance": 15,
+									"hostEdge": {
+										"$ref": "AAAAAAF/jLn5n5RLgeU="
+									},
+									"edgePosition": 1
+								}
+							],
+							"font": "Arial;13;0",
+							"head": {
+								"$ref": "AAAAAAF/elREvcwiKvs="
+							},
+							"tail": {
+								"$ref": "AAAAAAF/elBETbghri0="
+							},
+							"lineStyle": 1,
+							"points": "630:691;624:775",
+							"showVisibility": true,
+							"nameLabel": {
+								"$ref": "AAAAAAF/jLn5oJRMego="
+							},
+							"stereotypeLabel": {
+								"$ref": "AAAAAAF/jLn5oJRNX84="
+							},
+							"propertyLabel": {
+								"$ref": "AAAAAAF/jLn5oJRO654="
+							}
 						}
 					]
 				},
@@ -13468,7 +13563,22 @@
 					"_parent": {
 						"$ref": "AAAAAAF/ejZJxpdMnz8="
 					},
-					"name": "propose list of maximum 2 optional courses"
+					"name": "propose list of maximum 2 optional courses",
+					"ownedElements": [
+						{
+							"_type": "UMLInclude",
+							"_id": "AAAAAAF/jLn5npRJmGM=",
+							"_parent": {
+								"$ref": "AAAAAAF/elBETLgfMlw="
+							},
+							"source": {
+								"$ref": "AAAAAAF/elBETLgfMlw="
+							},
+							"target": {
+								"$ref": "AAAAAAF/elREvMwgfyw="
+							}
+						}
+					]
 				},
 				{
 					"_type": "UMLUseCase",
