@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace AcademicInfo.Controllers
 {
+    [Route("api/[controller]")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -12,17 +13,14 @@ namespace AcademicInfo.Controllers
         {
             _logger = logger;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return Json("Test Request on backend");
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        
+        [HttpGet]
+        [Route("error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
