@@ -13,7 +13,7 @@ namespace AcademicInfo.Controllers
         {
             _logger = logger;
         }
-        [HttpGet]
+        [HttpGet, Route("/student/{id}")]
         public IActionResult Index()
         {
             return Json("Test Request on backend");
