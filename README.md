@@ -12,4 +12,4 @@ Each faculty year will have a contract of studies, a curriculum (list of mandato
   - Install a suitable IDE: VSCode/Atom
   - Clone this repository and open the AcademicInfo-frontend/academic-info project.
   - To install dependencies needed, open a terminal and run the command: npm install (not mandatory for first version of the project)
-  - To run the front-end app, run the command: npm install
+  - To run the front-end app, run the command: npm start
