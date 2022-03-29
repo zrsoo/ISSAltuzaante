@@ -11,10 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<Student, IdentityRole>()
+/*builder.Services.AddIdentity<Student, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
-
+    .AddDefaultTokenProviders();*/
 
 builder.Services.AddCors(options =>
 {

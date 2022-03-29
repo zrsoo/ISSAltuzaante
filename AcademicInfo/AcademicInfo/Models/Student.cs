@@ -1,15 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AcademicInfo.Models
 {
-    public class Student : User
+    public partial class Student
     {
-        [Key]
-        private string StudentId { get; set; }
-        private string City { get; set; } = string.Empty;
-        private int Year { get; set; }  
-        [ForeignKey ("SpecializationId")]
-        private int SpecializationId { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public string Password { get; set; } = null!;
+        public string? City { get; set; }
+        public string? Year { get; set; }
     }
 }
