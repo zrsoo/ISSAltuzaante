@@ -11,5 +11,5 @@ Each faculty year will have a contract of studies, a curriculum (list of mandato
   - Install node.js from https://nodejs.org/en/
   - Install a suitable IDE: VSCode/Atom
   - Clone this repository and open the AcademicInfo-frontend/academic-info project.
-  - To install dependencies needed, open a terminal and run the command: npm install (not mandatory for first version of the project)
+  - To install dependencies needed, open a terminal and run the command: npm install (or npm ci - if you work on other node version than (16.14.0) )
   - To run the front-end app, run the command: npm start
