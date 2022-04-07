@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { HomeController } from './controllers/HomeController';
+import {HomeController, useHome} from './controllers/HomeController';
 
 function App() {
+  const home = useHome();
   const [testResponse, setTestResponse] = React.useState("");
   React.useEffect(() => {
     HomeController.getHome().then((response) => {
@@ -11,6 +12,11 @@ function App() {
       setTestResponse(response);
     });
   }, [])
+
+  if (!home) {
+
+    return null;
+  }
   
   return (
     <div className="App">
