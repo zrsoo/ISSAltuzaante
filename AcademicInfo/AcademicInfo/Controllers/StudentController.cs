@@ -2,6 +2,7 @@
 using InternshipBackend.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace AcademicInfo.Controllers
@@ -11,6 +12,7 @@ namespace AcademicInfo.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<Student> _studentManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         [HttpPost]
         [Route("register")]
@@ -52,6 +54,12 @@ namespace AcademicInfo.Controllers
                         Success = false, Message = "Error creating user!",
                         Errors = result.Errors.Select(e => e.Description).ToList()
                     });
+
+            // add User role to Student
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+            await _studentManager.AddToRoleAsync(student, UserRoles.User);
 
 
             return Ok(new Response {Success = true, Message = "User created successfully!"});
