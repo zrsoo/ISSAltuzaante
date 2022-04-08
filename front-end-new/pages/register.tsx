@@ -15,12 +15,12 @@ export default function RegisterPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: "string",
-        password: "string",
-        firstName: "string",
-        lastName: "string",
-        city: "string",
-        year: "string",
+        email,
+        password,
+        firstName,
+        lastName,
+        city,
+        year: parseInt(year),
       }),
     });
     if (response.status === 200) {
