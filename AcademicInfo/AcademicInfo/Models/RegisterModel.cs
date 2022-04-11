@@ -15,6 +15,8 @@ namespace InternshipBackend.Data
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "Lastname is required")]
         public string? LastName { get; set; }
+
+        //TODO: include all fields and add in corresponding table (student/teacher) according to IsTeacher
         public string? City { get; set; }
         public int? Year { get; set; }
         //public string Degree { get; set; }

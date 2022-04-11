@@ -11,10 +11,7 @@ namespace AcademicInfo.Models
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
-        //TODO: Add role field to AcademicUser
-        //TODO: refactor the DB, AspNetUsers holds AcademicUsers fields. Add 2 more tables Teacher and Student with corresponding fields
-        //that hold a foreign key to the corresponding element in AspNetUsers
-        //public string Role { get; set; } = null;
+        //fields to be removed, added to Student
         public string? City { get; set; }
         public string? Year { get; set; }
     }
