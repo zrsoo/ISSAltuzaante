@@ -2,11 +2,10 @@
 
 namespace AcademicInfo.Models
 {
-    public class Student : AcademicUser
+    public class Teacher : AcademicUser
     {
         [ForeignKey("AspNetUser")]
         public int Id { get; set; }
-        public string? City { get; set; }
-        public int? Year { get; set; }
+        public string Degree { get; set; }
     }
 }
