@@ -1,0 +1,14 @@
+{
+  "hello.label": "Hallo",
+  "roles.label": "deine rollen sind",
+  "logged.label": "Du bist nicht eingeloggt",
+  "Home": "Startseite",
+  "Categories": "Kategorien",
+  "Contact us": "Kontaktiere uns",
+  "Administrator": "Administrator",
+  "Login": "Einloggen",
+  "Logout": "Ausloggen",
+  "Signup": "Anmelden",
+  "Auction": "Versteigerung",
+  "Not_registered": "Nicht registriert? Jetzt registrieren!"
+}
