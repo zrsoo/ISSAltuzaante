@@ -8,15 +8,14 @@ import Login from './components/RegistrationSystem/Login';
 import { Link } from 'react-router-dom';
 import {Helmet} from 'react-helmet';
 
-export default function Home(props) {
-    var username = "";
+export default function Home(props) {    
     if (props.user) {
         return (
             <div>
                 <Helmet>
                     <title>Home</title>
                 </Helmet>
-                <h1>Hello, {props.user.email}. Welcome to academic info!</h1>
+                <h1>Hello, {props.user.firstName}. Welcome to academic info!</h1>
             </div>
         )   
     }

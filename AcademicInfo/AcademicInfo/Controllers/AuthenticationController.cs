@@ -113,19 +113,16 @@ namespace AcademicInfo.Controllers
         [Route("get-authenticated-user")]
         public async Task<ActionResult> getAuthenticatedUserByTokenAsync()
         {
-            //String email = User.FindFirst("Email")?.Value;
-            //if (email == null)
-            //    return null;
+            String email = User.FindFirst("Email")?.Value;
+            if (email == null)
+                return null;
 
-            //AcademicUser user = await _userManager.FindByNameAsync(email);
-            //if (user == null)
-            //    return null;
-            //UserDTO userDTO = new UserDTO(user);
-            UserDTO mockDTO = new UserDTO();
-            mockDTO.Email = "mock@email.com";   
-            mockDTO.FirstName = "Mo";
-            mockDTO.LastName = "Kc";
-            return StatusCode(200, mockDTO);
+            AcademicUser user = await _userManager.FindByNameAsync(email);
+            if (user == null)
+                return null;
+            UserDTO userDTO = new UserDTO(user);
+
+            return StatusCode(200, userDTO);
         }
     }
 }

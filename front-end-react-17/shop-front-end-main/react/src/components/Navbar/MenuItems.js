@@ -25,7 +25,7 @@ export const MenuItemsLoggedInUser = [
     },
     {
         title: 'Courses',
-        url: '/categories',
+        url: '/courses',
         cName: 'nav-links'
     },
     {
@@ -40,11 +40,6 @@ export const MenuItemsLoggedInAdmin = [
         title: 'Home',
         url: '/home',
         cName: 'nav-links activeButton'
-    },
-    {
-        title: 'Auction',
-        url: '/auction',
-        cName: 'nav-links'
     },
     {
         title: 'Administrator',

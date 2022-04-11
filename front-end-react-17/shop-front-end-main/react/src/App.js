@@ -10,24 +10,16 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Logout from './components/Logout/Logout';
 import AuthenticationController from './controllers/AuthenticationController';
 
-export default class App extends React.Component {
-  state = {
-  };
-
-  async setUser() {
-    this.setState({
-      user: await AuthenticationController.getUser()
-    });
-  }
-
-  componentDidMount = () => {
-    this.setUser();
-  };
-
-  render() {
-    const { user } = this.state;
-
-    return (
+export default function App() {
+  const [user, setUser] = React.useState();
+  
+  React.useEffect(() => {
+    AuthenticationController.getUser().then((response) => {
+      setUser(response);
+    console.log(response)});
+  } ,[]);
+  
+  return (
       <div className="App">
         <Suspense fallback={"Loading..."}>
           <Navbar user={user} />
@@ -37,6 +29,5 @@ export default class App extends React.Component {
           <Route exact path="/logout" component={Logout} />
         </Suspense>
       </div>
-    );
-  }
+  )
 }
