@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react';
-import HttpRequestController from './controller/HttpRequestController';
 import ReactLoading from "react-loading";
 import "../src/components/Loading/loading.css"
 import Login from './components/RegistrationSystem/Login';
