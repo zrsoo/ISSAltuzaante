@@ -15,9 +15,9 @@ namespace InternshipBackend.Data
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "Lastname is required")]
         public string? LastName { get; set; }
-        [Required(ErrorMessage = "City is required")]
         public string? City { get; set; }
-        [Required(ErrorMessage = "Year is required")]
         public int? Year { get; set; }
+        //public string Degree { get; set; }
+        //public bool IsTeacher { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace AcademicInfo.Config
 {
-    public partial class ApplicationDbContext : IdentityDbContext<Student>
+    public partial class ApplicationDbContext : IdentityDbContext<AcademicUser>
     {
         public ApplicationDbContext()
         {
@@ -18,7 +18,7 @@ namespace AcademicInfo.Config
             : base(options)
         {
         }
-        public virtual DbSet<Student> Students { get; set; } = null!;
+        public virtual DbSet<AcademicUser> Students { get; set; } = null!;
         public virtual DbSet<LoginModel> Logins { get; set; } = null!;
         public virtual DbSet<RegisterModel> Registers { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

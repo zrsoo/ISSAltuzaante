@@ -13,10 +13,10 @@ namespace AcademicInfo.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserManager<Student> _userManager;
+        private readonly UserManager<AcademicUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public UserService(UserManager<Student> userManager, IConfiguration configuration)
+        public UserService(UserManager<AcademicUser> userManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -24,7 +24,7 @@ namespace AcademicInfo.Services
 
 
 
-        public async Task<JwtSecurityToken> GenerateJwt(Student user)
+        public async Task<JwtSecurityToken> GenerateJwt(AcademicUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
             var authClaims = new List<Claim>

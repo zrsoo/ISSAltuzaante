@@ -1,0 +1,33 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* .home-background {
+  background-image: url("./resources/home-background.png");
+  margin: 3em 10rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+} */
+
+.home-welcome {
+  font-size: 5rem;
+  color: #5E63B6;
+}
+.home-hello {
+  color: #5E63B6
+}
+
+.home-login-div {
+  margin-bottom: 1rem;
+}
+
+.home-sign-up-div {
+  text-align: center;
+  margin-top: 10%;
+}
+

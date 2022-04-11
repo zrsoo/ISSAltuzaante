@@ -1,0 +1,59 @@
+
+export const MenuItems = [
+    {
+        title: 'Home',
+        url: '/home',
+        cName: 'nav-links activeButton'
+    },
+    {
+        title: 'Login',
+        url: '/login',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Signup',
+        url: '/signup',
+        cName: 'nav-links'
+    }
+]
+
+export const MenuItemsLoggedInUser = [
+    {
+        title: 'Home',
+        url: '/home',
+        cName: 'nav-links activeButton'
+    },
+    {
+        title: 'Courses',
+        url: '/categories',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Logout',
+        url: '/logout',
+        cName: 'nav-links'
+    }
+]
+
+export const MenuItemsLoggedInAdmin = [
+    {
+        title: 'Home',
+        url: '/home',
+        cName: 'nav-links activeButton'
+    },
+    {
+        title: 'Auction',
+        url: '/auction',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Administrator',
+        url: '/admin/home',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Logout',
+        url: '/logout',
+        cName: 'nav-links'
+    }
+]

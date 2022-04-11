@@ -7,7 +7,7 @@ namespace AcademicInfo.Services
 {
     public interface IUserService
     {
-        public Task<JwtSecurityToken> GenerateJwt(Student user);
+        public Task<JwtSecurityToken> GenerateJwt(AcademicUser user);
         
     }
 }

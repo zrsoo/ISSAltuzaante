@@ -1,0 +1,73 @@
+{
+  "name": "react-website",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://friendly-gates-2f240c.netlify.app",
+  "dependencies": {
+    "@material-ui/core": "^4.12.1",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "framer-motion": "^4.1.17",
+    "googleapis": "^76.0.0",
+    "i18next": "^20.3.3",
+    "i18next-browser-languagedetector": "^6.1.2",
+    "i18next-http-backend": "^1.2.6",
+    "i18next-xhr-backend": "^3.2.2",
+    "moment": "^2.29.1",
+    "moments": "0.0.2",
+    "react": "^17.0.2",
+    "react-alice-carousel": "^2.5.1",
+    "react-bootstrap": "^1.6.1",
+    "react-countdown": "^2.3.2",
+    "react-currency-conv": "^1.1.0",
+    "react-datetime-picker": "^3.3.0",
+    "react-dom": "^17.0.2",
+    "react-google-autocomplete": "^2.4.0",
+    "react-helmet": "^6.1.0",
+    "react-i18next": "^11.11.2",
+    "react-loading": "^2.0.3",
+    "react-responsive-carousel": "^3.2.18",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.3",
+    "react-simple-image-slider": "^2.1.2",
+    "react-slick": "^0.28.1",
+    "react-stripe-checkout": "^2.6.3",
+    "react-toastify": "^7.0.4",
+    "react-widgets": "^5.2.0",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^11.2.7",
+    "react-test-renderer": "^17.0.2"
+  }
+}
