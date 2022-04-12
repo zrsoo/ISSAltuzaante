@@ -6,7 +6,8 @@ class AuthenticationController {
             const response = await axios.post('/register', data)     
          } catch (error) {
              console.log(error);
-             alert("ERROR Try again!");
+             //alert("ERROR Try again!");
+             alert(error.response.data.errors);
              return;
          }
          alert("Succes. Log in!");
