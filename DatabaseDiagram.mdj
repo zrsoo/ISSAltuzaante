@@ -730,13 +730,28 @@
 													"top": 421,
 													"width": 281.22509765625,
 													"height": 13
+												},
+												{
+													"_type": "ERDColumnView",
+													"_id": "AAAAAAGAHLRD4cp9pvs=",
+													"_parent": {
+														"$ref": "AAAAAAF/iBj6DIAVkBo="
+													},
+													"model": {
+														"$ref": "AAAAAAGAHLRDvcp6zZk="
+													},
+													"font": "Arial;13;0",
+													"left": 1341,
+													"top": 436,
+													"width": 281.22509765625,
+													"height": 13
 												}
 											],
 											"font": "Arial;13;0",
 											"left": 1336,
 											"top": 311,
 											"width": 291.22509765625,
-											"height": 128
+											"height": 143
 										}
 									],
 									"font": "Arial;13;0",
@@ -870,6 +885,7 @@
 													"model": {
 														"$ref": "AAAAAAGAHK+cScpsJcM="
 													},
+													"visible": false,
 													"font": "Arial;13;0",
 													"left": 1093,
 													"top": 777,
@@ -881,7 +897,7 @@
 											"left": 1088,
 											"top": 727,
 											"width": 337.81689453125,
-											"height": 68
+											"height": 53
 										}
 									],
 									"font": "Arial;13;0",
@@ -2553,6 +2569,19 @@
 									"name": "CURR_ID",
 									"type": "INTEGER",
 									"foreignKey": true
+								},
+								{
+									"_type": "ERDColumn",
+									"_id": "AAAAAAGAHLRDvcp6zZk=",
+									"_parent": {
+										"$ref": "AAAAAAF/iBj6DIARMLo="
+									},
+									"name": "FACULTY_ID",
+									"type": "INTEGER",
+									"foreignKey": true,
+									"referenceTo": {
+										"$ref": "AAAAAAF/iAnLin85g/0="
+									}
 								}
 							]
 						},
@@ -2965,14 +2994,6 @@
 									}
 								}
 							]
-						},
-						{
-							"_type": "ERDEntity",
-							"_id": "AAAAAAGAHK78+consXc=",
-							"_parent": {
-								"$ref": "AAAAAAF/h/0WD37Mn3I="
-							},
-							"name": "Entity1"
 						}
 					]
 				}
