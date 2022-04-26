@@ -11,8 +11,16 @@ namespace AcademicInfo.Models
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
-        //fields to be removed, added to Student
         public string? City { get; set; }
         public string? Year { get; set; }
+        
+        public string? Degree { get; set; }
+        
+        public bool? IsChiefOfDepartment { get; set; }
+        
+        public int? FacultyId { get; set; }
+        
+        public int? SpecializationId { get; set; }
+        
     }
 }

@@ -1,9 +1,10 @@
 ﻿using AcademicInfo.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InternshipBackend.Data
 {
-    public class RegisterModel
+    public class StudentRegisterModel
     {
         [Key]
         [EmailAddress]
@@ -15,11 +16,14 @@ namespace InternshipBackend.Data
         public string? FirstName { get; set; }
         [Required(ErrorMessage = "Lastname is required")]
         public string? LastName { get; set; }
-
-        //TODO: include all fields and add in corresponding table (student/teacher) according to IsTeacher
+        
+        [Required(ErrorMessage = "City is required")]
         public string? City { get; set; }
+        [Required(ErrorMessage = "Year is required")]
         public int? Year { get; set; }
-        //public string Degree { get; set; }
-        //public bool IsTeacher { get; set; }
+        
+        [Required(ErrorMessage = "Specialization is required")]
+        [ForeignKey("Specialization")]
+        public int? SpecializationId { get; set; }
     }
 }

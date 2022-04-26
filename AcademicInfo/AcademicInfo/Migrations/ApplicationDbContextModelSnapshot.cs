@@ -22,21 +22,7 @@ namespace AcademicInfo.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AcademicInfo.Models.LoginModel", b =>
-                {
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Email");
-
-                    b.ToTable("Logins");
-                });
-
-            modelBuilder.Entity("AcademicInfo.Models.Student", b =>
+            modelBuilder.Entity("AcademicInfo.Models.AcademicUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -51,6 +37,9 @@ namespace AcademicInfo.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Degree")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -59,9 +48,15 @@ namespace AcademicInfo.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsChiefOfDepartment")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -97,6 +92,9 @@ namespace AcademicInfo.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SpecializationId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -120,7 +118,122 @@ namespace AcademicInfo.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("InternshipBackend.Data.RegisterModel", b =>
+            modelBuilder.Entity("AcademicInfo.Models.Discipline", b =>
+                {
+                    b.Property<int>("DisciplineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DisciplineId"), 1L, 1);
+
+                    b.Property<int?>("FacultyId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("IsOptional")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DisciplineId");
+
+                    b.ToTable("Disciplines");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.Faculty", b =>
+                {
+                    b.Property<int>("FacultyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FacultyId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("FacultyId");
+
+                    b.ToTable("Faculties");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.LoginModel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("Logins");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.Specialization", b =>
+                {
+                    b.Property<int>("SpecializationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SpecializationId"), 1L, 1);
+
+                    b.Property<string>("Degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FacultyId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SpecializationId");
+
+                    b.ToTable("Specializations");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.TeacherRegisterModel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FacultyId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsChiefOfDepartment")
+                        .IsRequired()
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("TeacherRegisters");
+                });
+
+            modelBuilder.Entity("InternshipBackend.Data.StudentRegisterModel", b =>
                 {
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(450)");
@@ -141,13 +254,17 @@ namespace AcademicInfo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SpecializationId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
                     b.Property<int?>("Year")
                         .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Email");
 
-                    b.ToTable("Registers");
+                    b.ToTable("StudentRegisters");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -294,7 +411,7 @@ namespace AcademicInfo.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("AcademicInfo.Models.Student", null)
+                    b.HasOne("AcademicInfo.Models.AcademicUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -303,7 +420,7 @@ namespace AcademicInfo.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("AcademicInfo.Models.Student", null)
+                    b.HasOne("AcademicInfo.Models.AcademicUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -318,7 +435,7 @@ namespace AcademicInfo.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AcademicInfo.Models.Student", null)
+                    b.HasOne("AcademicInfo.Models.AcademicUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -327,7 +444,7 @@ namespace AcademicInfo.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("AcademicInfo.Models.Student", null)
+                    b.HasOne("AcademicInfo.Models.AcademicUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

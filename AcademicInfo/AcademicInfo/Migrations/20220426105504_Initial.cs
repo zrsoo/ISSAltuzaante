@@ -34,6 +34,10 @@ namespace AcademicInfo.Migrations
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsChiefOfDepartment = table.Column<bool>(type: "bit", nullable: true),
+                    FacultyId = table.Column<int>(type: "int", nullable: true),
+                    SpecializationId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -54,6 +58,34 @@ namespace AcademicInfo.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Disciplines",
+                columns: table => new
+                {
+                    DisciplineId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsOptional = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Disciplines", x => x.DisciplineId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Faculties",
+                columns: table => new
+                {
+                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Faculties", x => x.FacultyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Logins",
                 columns: table => new
                 {
@@ -66,7 +98,22 @@ namespace AcademicInfo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Registers",
+                name: "Specializations",
+                columns: table => new
+                {
+                    SpecializationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Specializations", x => x.SpecializationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentRegisters",
                 columns: table => new
                 {
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -74,11 +121,29 @@ namespace AcademicInfo.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false)
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    SpecializationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Registers", x => x.Email);
+                    table.PrimaryKey("PK_StudentRegisters", x => x.Email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeacherRegisters",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsChiefOfDepartment = table.Column<bool>(type: "bit", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeacherRegisters", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,10 +310,22 @@ namespace AcademicInfo.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Disciplines");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
+
+            migrationBuilder.DropTable(
                 name: "Logins");
 
             migrationBuilder.DropTable(
-                name: "Registers");
+                name: "Specializations");
+
+            migrationBuilder.DropTable(
+                name: "StudentRegisters");
+
+            migrationBuilder.DropTable(
+                name: "TeacherRegisters");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

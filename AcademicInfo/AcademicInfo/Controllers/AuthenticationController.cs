@@ -55,8 +55,8 @@ namespace AcademicInfo.Controllers
         }
         
         [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        [Route("register-student")]
+        public async Task<IActionResult> Register([FromBody] StudentRegisterModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace AcademicInfo.Controllers
                     select error.ErrorMessage;
 
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response {Success = false, Message = "Error creating user!", Errors = errors.ToList()});
+                    new Response {Success = false, Message = "Error creating student!", Errors = errors.ToList()});
 
             }
 
@@ -74,8 +74,8 @@ namespace AcademicInfo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response
                     {
-                        Success = false, Message = "Error creating user!",
-                        Errors = new List<string> {"User already exists!"}
+                        Success = false, Message = "Error creating student!",
+                        Errors = new List<string> {"Student already exists!"}
                     });
 
             AcademicUser student = new()
@@ -87,7 +87,8 @@ namespace AcademicInfo.Controllers
                 Password = model.Password!,
                 UserName = model.Email,
                 City = model.City,
-                Year = model.Year.ToString()
+                Year = model.Year.ToString(),
+                SpecializationId = model.SpecializationId
             };
 
             var result = await _userManager.CreateAsync(student, model.Password);
@@ -100,10 +101,67 @@ namespace AcademicInfo.Controllers
                     });
 
             // add User role to Student
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Student))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Student));
 
-            await _userManager.AddToRoleAsync(student, UserRoles.User);
+            await _userManager.AddToRoleAsync(student, UserRoles.Student);
+
+
+            return Ok(new Response {Success = true, Message = "User created successfully!"});
+        }
+        
+        [HttpPost]
+        [Route("register-teacher")]
+        public async Task<IActionResult> Register([FromBody] TeacherRegisterModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = from state in ModelState.Values
+                    from error in state.Errors
+                    select error.ErrorMessage;
+
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response {Success = false, Message = "Error creating teacher!", Errors = errors.ToList()});
+
+            }
+
+            var userExists = await _userManager.FindByNameAsync(model.Email);
+            if (userExists != null)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response
+                    {
+                        Success = false, Message = "Error creating teacher!",
+                        Errors = new List<string> {"Teacher already exists!"}
+                    });
+
+            AcademicUser teacher = new()
+            {
+                Email = model.Email!,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = model.FirstName!,
+                LastName = model.LastName!,
+                Password = model.Password!,
+                UserName = model.Email,
+                Degree = model.Degree,
+                IsChiefOfDepartment = model.IsChiefOfDepartment,
+                FacultyId = model.FacultyId
+                
+            };
+
+            var result = await _userManager.CreateAsync(teacher, model.Password);
+            if (!result.Succeeded)
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response
+                    {
+                        Success = false, Message = "Error creating user!",
+                        Errors = result.Errors.Select(e => e.Description).ToList()
+                    });
+
+            // add User role to Student
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Teacher))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Teacher));
+
+            await _userManager.AddToRoleAsync(teacher, UserRoles.Teacher);
 
 
             return Ok(new Response {Success = true, Message = "User created successfully!"});
