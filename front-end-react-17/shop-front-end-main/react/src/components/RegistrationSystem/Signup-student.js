@@ -3,13 +3,14 @@ import {Helmet} from "react-helmet";
 import AuthenticationController from '../../controllers/AuthenticationController';
 import { useState } from 'react';
 
-export default function Signup() {
+export default function SignupStudent() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
     const [city, setCity] = useState();
     const [year, setYear] = useState();
+    const [specialization, setSpecialization] = useState();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -19,10 +20,12 @@ export default function Signup() {
             email: email,
             password: password,
             city: city, 
-            year: parseInt(year)
+            year: parseInt(year),
+            specializationId: parseInt(specialization)
         };
+        console.log(specialization)
 
-        AuthenticationController.register(data);
+        AuthenticationController.register_student(data);
     };
 
     return (
@@ -66,6 +69,11 @@ export default function Signup() {
                         <label>Year</label>
                         <input type="text" className="form-control" placeholder="Year"
                             onChange={e => setYear(e.target.value)} />
+                    </div>
+                    <div className="form-group">
+                        <label>Specialization</label>
+                        <input type="text" className="form-control" placeholder="Specialization"
+                               onChange={e => setSpecialization(e.target.value)} />
                     </div>
 
                     <button className="btn btn-primary btn-block submit-btn">Sign Up</button>

@@ -66,7 +66,7 @@ namespace AcademicInfo.Controllers
 
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response {Success = false, Message = "Error creating student!", Errors = errors.ToList()});
-
+                
             }
 
             var userExists = await _userManager.FindByNameAsync(model.Email);
@@ -88,7 +88,7 @@ namespace AcademicInfo.Controllers
                 UserName = model.Email,
                 City = model.City,
                 Year = model.Year.ToString(),
-                SpecializationId = model.SpecializationId
+                SpecializationId = model.SpecializationId 
             };
 
             var result = await _userManager.CreateAsync(student, model.Password);

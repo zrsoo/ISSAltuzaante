@@ -11,8 +11,13 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        title: 'Signup',
-        url: '/signup',
+        title: 'SignupStudent',
+        url: '/signup-student',
+        cName: 'nav-links'
+    },
+    {
+        title: 'SignupTeacher',
+        url: '/signup-teacher',
         cName: 'nav-links'
     }
 ]

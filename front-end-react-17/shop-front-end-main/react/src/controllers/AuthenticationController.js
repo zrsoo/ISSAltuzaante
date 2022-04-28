@@ -1,9 +1,9 @@
 import axios from "axios";
 
 class AuthenticationController {
-     async register(data) {
+     async register_student(data) {
          try {
-            const response = await axios.post('/register', data)     
+            const response = await axios.post('/register-student', data)
          } catch (error) {
              console.log(error);
              //alert("ERROR Try again!");
@@ -11,6 +11,18 @@ class AuthenticationController {
              return;
          }
          alert("Succes. Log in!");
+    }
+
+    async register_teacher(data) {
+        try {
+            const response = await axios.post('/register-teacher', data)
+        } catch (error) {
+            console.log(error);
+            //alert("ERROR Try again!");
+            alert(error.response.data.errors);
+            return;
+        }
+        alert("Succes. Log in!");
     }
 
     async getUser(){
