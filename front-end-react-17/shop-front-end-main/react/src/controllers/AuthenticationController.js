@@ -3,7 +3,7 @@ import axios from "axios";
 class AuthenticationController {
      async register_student(data) {
          try {
-            const response = await axios.post('/register-student', data)
+            const response = await axios.post('/Authenticate/register-student', data)
          } catch (error) {
              console.log(error);
              //alert("ERROR Try again!");
@@ -15,7 +15,7 @@ class AuthenticationController {
 
     async register_teacher(data) {
         try {
-            const response = await axios.post('/register-teacher', data)
+            const response = await axios.post('/Authenticate/register-teacher', data)
         } catch (error) {
             console.log(error);
             //alert("ERROR Try again!");

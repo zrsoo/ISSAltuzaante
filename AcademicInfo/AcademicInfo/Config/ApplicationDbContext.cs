@@ -22,6 +22,8 @@ namespace AcademicInfo.Config
         public virtual DbSet<LoginModel> Logins { get; set; } = null!;
         public virtual DbSet<StudentRegisterModel> StudentRegisters { get; set; } = null!;
         public virtual DbSet<TeacherRegisterModel> TeacherRegisters { get; set; } = null!;
+        public virtual DbSet<UpdatePasswordModel> PasswordsUpdates { get; set; } = null!;
+        public virtual DbSet<UpdateUserModel> UsersUpdates { get; set; } = null!;
         public virtual DbSet<Specialization> Specializations { get; set; } = null!;
         public virtual DbSet<Faculty> Faculties { get; set; } = null!;
         public virtual DbSet<Discipline> Disciplines { get; set; } = null!;
