@@ -5,6 +5,7 @@ using AcademicInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Entity;
 using System.Diagnostics;
 
 namespace AcademicInfo.Controllers
@@ -65,20 +66,29 @@ namespace AcademicInfo.Controllers
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!" });
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("update-password")]
         [Authorize]
         public async Task<IActionResult> UpdatePasswordAsync([FromBody] UpdatePasswordModel user)
         {
-            var foundUser = await _userManager.FindByNameAsync(user.Email);
-            if (foundUser != null)
+            var currentUserEmail = _currentUserService.GetUserId();
+            user.Email = currentUserEmail;
+
+            if (currentUserEmail != null)
             {
-                var result = await _userService.UpdatePasswordAsync(user);
-                if (result.Success == true)
+                if (user.NewPassword == user.Password)
                 {
-                    return Ok(new Response { Success = true, Message = "User password updated successfully!" });
+                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "The new password has to be different from the old one!" });
                 }
-                else return StatusCode(StatusCodes.Status500InternalServerError, result);
+                else
+                {
+                    var result = await _userService.UpdatePasswordAsync(user);
+                    if (result.Success == true)
+                    {
+                        return Ok(new Response { Success = true, Message = "User password updated successfully!" });
+                    }
+                    else return StatusCode(StatusCodes.Status500InternalServerError, result);
+                }
             }
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!", Errors = new List<string> { "Email doesn't exist!" } }); ;
         }

@@ -44,9 +44,12 @@ namespace AcademicInfo.Repository
         public async Task<bool> UpdatePassword(UpdatePasswordModel user)
         {
             var userFound = await _userManager.FindByNameAsync(user.Email);
+
             if (await _userManager.CheckPasswordAsync(userFound, user.Password))
             {
+                userFound.Password = user.NewPassword;
                 await _userManager.ChangePasswordAsync(userFound, user.Password, user.NewPassword);
+                await dbContext.SaveChangesAsync();
                 return true;
             }
             return false;

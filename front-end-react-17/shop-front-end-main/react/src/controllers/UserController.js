@@ -21,7 +21,7 @@ class UserController {
         } catch (error) {
             console.log(error);
             //alert("ERROR Try again!");
-            alert(error.response.data.errors);
+            alert(error.response.data.message);
             return;
         }
         alert("Succes. Password updated!");
