@@ -3,7 +3,7 @@ import axios from "axios";
 class AuthenticationController {
      async register(data) {
          try {
-            const response = await axios.post('/register', data)     
+            const response = await axios.post('/Authenticate/register', data)
          } catch (error) {
              console.log(error);
              //alert("ERROR Try again!");
@@ -17,7 +17,7 @@ class AuthenticationController {
         if (localStorage.getItem('token') != null) {
             try {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
-                const response = await axios.get('/get-authenticated-user');
+                const response = await axios.get('/Authenticate/get-authenticated-user');
                 //console.log(response);
                 return response.data;
             } catch (error) {
@@ -32,7 +32,8 @@ class AuthenticationController {
     async login(data) {
         let user = "";
         try {
-            const response = await axios.post('/login', data);
+            const response = await axios.post('/Authenticate/login', data);
+            console.log("pl")
             localStorage.setItem('token', response.data.token);
             console.log("RESPONSE", response.data);
             user = response.data;

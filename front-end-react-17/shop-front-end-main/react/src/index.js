@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import './i18n';
 
-axios.defaults.baseURL = 'https://localhost:7161';
+axios.defaults.baseURL = 'https://localhost:7161/api';
 
 ReactDOM.render(
     <BrowserRouter>
