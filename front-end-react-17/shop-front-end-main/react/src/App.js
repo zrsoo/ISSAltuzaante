@@ -10,6 +10,10 @@ import { Route } from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Logout from './components/Logout/Logout';
 import AuthenticationController from './controllers/AuthenticationController';
+import UserController from "./controllers/UserController";
+import UpdateUser from "./components/Update/UpdateUser";
+import UpdatePassword from "./components/Update/UpdatePassword";
+
 
 export default function App() {
   const [user, setUser] = React.useState();
@@ -18,7 +22,12 @@ export default function App() {
     AuthenticationController.getUser().then((response) => {
       setUser(response);
     console.log(response)});
+    UserController.getUser().then((response) => {
+      setUser(response);
+      console.log(response)});
   } ,[]);
+
+
   
   return (
       <div className="App">
@@ -29,6 +38,9 @@ export default function App() {
           <Route exact path="/signup-student" component={SignupStudent} />
           <Route exact path="/signup-teacher" component={SignupTeacher} />
           <Route exact path="/logout" component={Logout} />
+          <Route exact path="/updateuser" component={UpdateUser} />
+          <Route exact path="/update-password" component={UpdatePassword} />
+
         </Suspense>
       </div>
   )

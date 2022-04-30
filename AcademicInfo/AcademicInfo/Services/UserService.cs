@@ -8,21 +8,68 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using AcademicInfo.Models;
+using AcademicInfo.Repository;
 
 namespace AcademicInfo.Services
 {
     public class UserService : IUserService
     {
+        private readonly IUserRepo _userRepo;
         private readonly UserManager<AcademicUser> _userManager;
         private readonly IConfiguration _configuration;
+        private readonly ICurrentUserService _currentUserService;
 
-        public UserService(UserManager<AcademicUser> userManager, IConfiguration configuration)
+
+        public UserService(UserManager<AcademicUser> userManager, IConfiguration configuration, IUserRepo userRepo, ICurrentUserService currentUserService)
         {
+            _userRepo = userRepo;
             _userManager = userManager;
+            _currentUserService = currentUserService;
             _configuration = configuration;
         }
 
+        public async Task UpdateAsync(UpdateUserModel user)
+        {
+            if (!String.IsNullOrEmpty(user.FirstName))
+            {
+                await _userRepo.UpdateFirstNameAsync(user);
+            }
+            if (!String.IsNullOrEmpty(user.LastName))
+            {
+                await _userRepo.UpdateLastNameAsync(user);
+            }
+            //if (!String.IsNullOrEmpty(user.Password))
+            //{
+            //    await _userRepo.UpdatePasswordAsync(user);
+            //}
 
+        }
+
+        public async Task<Response> UpdatePasswordAsync(UpdatePasswordModel user)
+        {
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasMinimum8Chars = new Regex(@".{8,}");
+            var hasSpecialCharacter = new Regex(@"[!@#$%^&*]+");
+
+            var isValidated = hasNumber.IsMatch(user.NewPassword) && hasUpperChar.IsMatch(user.NewPassword) && hasMinimum8Chars.IsMatch(user.NewPassword) && hasSpecialCharacter.IsMatch(user.NewPassword);
+
+
+            if (isValidated)
+            {
+                bool isOldPasswordCorrect = await _userRepo.UpdatePassword(user);
+                if (isOldPasswordCorrect)
+                {
+                    return new Response(true, "Password was reset successfully.");
+                }
+                else
+                {
+                    return new Response(false, "Old password is incorrect.");
+                }
+            }
+            return new Response(false, "New password should contain at least one number, capital letter and should be at least 8 characters long.");
+
+        }
 
         public async Task<JwtSecurityToken> GenerateJwt(AcademicUser user)
         {

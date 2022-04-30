@@ -9,6 +9,7 @@ using AcademicInfo.Models.DTOs;
 
 namespace AcademicInfo.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthenticateController : ControllerBase
     {

@@ -37,6 +37,16 @@ export const MenuItemsLoggedInUser = [
         title: 'Logout',
         url: '/logout',
         cName: 'nav-links'
+    },
+    {
+        title: 'Update User',
+        url: '/updateuser',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Update Password',
+        url: '/update-password',
+        cName: 'nav-links'
     }
 ]
 
@@ -49,6 +59,16 @@ export const MenuItemsLoggedInAdmin = [
     {
         title: 'Administrator',
         url: '/admin/home',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Update User',
+        url: '/updateuser',
+        cName: 'nav-links'
+    },
+    {
+        title: 'Update Password',
+        url: '/update-password',
         cName: 'nav-links'
     },
     {

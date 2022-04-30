@@ -1,6 +1,7 @@
 using System.Text;
 using AcademicInfo.Config;
 using AcademicInfo.Models;
+using AcademicInfo.Repository;
 using AcademicInfo.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddControllers().AddNewtonsoftJson();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -120,8 +124,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
+
 
 app.Run();
