@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicInfo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220426105504_Initial")]
-    partial class Initial
+    [Migration("20220501120221_update-discipline-table")]
+    partial class updatedisciplinetable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,9 +136,18 @@ namespace AcademicInfo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MaxNumberOfStudents")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfStudents")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("DisciplineId");
 
@@ -233,6 +242,39 @@ namespace AcademicInfo.Migrations
                     b.HasKey("Email");
 
                     b.ToTable("TeacherRegisters");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.UpdatePasswordModel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("NewPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("PasswordsUpdates");
+                });
+
+            modelBuilder.Entity("AcademicInfo.Models.UpdateUserModel", b =>
+                {
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Email");
+
+                    b.ToTable("UsersUpdates");
                 });
 
             modelBuilder.Entity("InternshipBackend.Data.StudentRegisterModel", b =>

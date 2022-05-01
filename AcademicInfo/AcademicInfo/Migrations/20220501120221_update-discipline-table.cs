@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class Initial : Migration
+    public partial class updatedisciplinetable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,7 +65,10 @@ namespace AcademicInfo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsOptional = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    NumberOfStudents = table.Column<int>(type: "int", nullable: false),
+                    MaxNumberOfStudents = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,6 +98,19 @@ namespace AcademicInfo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Logins", x => x.Email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PasswordsUpdates",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NewPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PasswordsUpdates", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,6 +160,19 @@ namespace AcademicInfo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TeacherRegisters", x => x.Email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UsersUpdates",
+                columns: table => new
+                {
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersUpdates", x => x.Email);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,6 +348,9 @@ namespace AcademicInfo.Migrations
                 name: "Logins");
 
             migrationBuilder.DropTable(
+                name: "PasswordsUpdates");
+
+            migrationBuilder.DropTable(
                 name: "Specializations");
 
             migrationBuilder.DropTable(
@@ -326,6 +358,9 @@ namespace AcademicInfo.Migrations
 
             migrationBuilder.DropTable(
                 name: "TeacherRegisters");
+
+            migrationBuilder.DropTable(
+                name: "UsersUpdates");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

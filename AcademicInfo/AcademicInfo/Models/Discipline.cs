@@ -14,4 +14,10 @@ public class Discipline
     [Required(ErrorMessage = "Faculty is required")]
     [ForeignKey("Faculty")]
     public int? FacultyId { get; set; }
+
+    public int NumberOfStudents { get; set; }
+    public int MaxNumberOfStudents { get; set; }
+    public int Year { get; set; }
+
+
 }
