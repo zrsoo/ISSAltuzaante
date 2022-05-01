@@ -130,9 +130,8 @@ namespace AcademicInfo.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("IsOptional")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsOptional")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MaxNumberOfStudents")
                         .HasColumnType("int");

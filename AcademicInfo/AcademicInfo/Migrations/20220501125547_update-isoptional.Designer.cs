@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicInfo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220501120221_update-discipline-table")]
-    partial class updatedisciplinetable
+    [Migration("20220501125547_update-isoptional")]
+    partial class updateisoptional
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,9 +132,8 @@ namespace AcademicInfo.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("IsOptional")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsOptional")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MaxNumberOfStudents")
                         .HasColumnType("int");

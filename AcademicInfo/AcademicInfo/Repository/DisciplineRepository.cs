@@ -1,7 +1,7 @@
 ﻿using AcademicInfo.Config;
 using AcademicInfo.Models;
 using AcademicInfo.Services;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcademicInfo.Repository
 {
@@ -21,6 +21,12 @@ namespace AcademicInfo.Repository
         {
             var result = _dataContext.SaveChanges();
             return result;
+        }
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            var results = await _dataContext.SaveChangesAsync(cancellationToken);
+            return results;
         }
 
         public IQueryable<Discipline> Get()
@@ -43,7 +49,10 @@ namespace AcademicInfo.Repository
             return _dataContext.Set<Discipline>().Update(discipline).Entity;
         }
 
-
+        public async Task<Discipline> GetByIdAsync(int id)
+        {
+            return await _dataContext.Set<Discipline>().FirstOrDefaultAsync(i => i.DisciplineId == id);
+        }
 
     }
 }

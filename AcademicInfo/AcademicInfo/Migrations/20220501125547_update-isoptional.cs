@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class updatedisciplinetable : Migration
+    public partial class updateisoptional : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,7 +64,7 @@ namespace AcademicInfo.Migrations
                     DisciplineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsOptional = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsOptional = table.Column<bool>(type: "bit", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false),
                     NumberOfStudents = table.Column<int>(type: "int", nullable: false),
                     MaxNumberOfStudents = table.Column<int>(type: "int", nullable: false),

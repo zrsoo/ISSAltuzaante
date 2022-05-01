@@ -70,7 +70,7 @@ export default function SignupTeacher() {
                                onChange={e => setStatus(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <label>Faculty</label>
+                        <label>FacultyId</label>
                         <input type="text" className="form-control" placeholder="Faculty"
                                onChange={e => setFaculty(e.target.value)} />
                     </div>
