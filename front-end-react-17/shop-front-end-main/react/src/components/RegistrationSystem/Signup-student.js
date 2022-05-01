@@ -71,7 +71,7 @@ export default function SignupStudent() {
                             onChange={e => setYear(e.target.value)} />
                     </div>
                     <div className="form-group">
-                        <label>Specialization</label>
+                        <label>SpecializationId</label>
                         <input type="text" className="form-control" placeholder="Specialization"
                                onChange={e => setSpecialization(e.target.value)} />
                     </div>
