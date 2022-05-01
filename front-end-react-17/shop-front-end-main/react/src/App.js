@@ -13,6 +13,7 @@ import AuthenticationController from './controllers/AuthenticationController';
 import UserController from "./controllers/UserController";
 import UpdateUser from "./components/Update/UpdateUser";
 import UpdatePassword from "./components/Update/UpdatePassword";
+import AddOptionals from './components/Optionals/addOptionals';
 
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/updateuser" component={UpdateUser} />
           <Route exact path="/update-password" component={UpdatePassword} />
+          <Route exact path="/addOptionals" component={AddOptionals}/>
 
         </Suspense>
       </div>
