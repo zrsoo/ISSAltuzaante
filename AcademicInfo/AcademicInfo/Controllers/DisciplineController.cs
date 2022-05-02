@@ -15,6 +15,7 @@ namespace AcademicInfo.Controllers
         private readonly DisciplineService _disciplineService;
         private readonly UserManager<AcademicUser> _userManager;
 
+
         public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager)
         {
             _disciplineService = disciplineService;
@@ -56,7 +57,7 @@ namespace AcademicInfo.Controllers
             {
                 return null;
             }
-
+            
             if (user.IsChiefOfDepartment == true)
             {
                 List<Discipline> disciplines = await _disciplineService.GetAll();
@@ -85,6 +86,34 @@ namespace AcademicInfo.Controllers
                     Message = "The discipline could not be added",
                     Errors = new List<String> { exc.Message }
                 });
+            }
+        }
+      
+        [HttpGet]
+        [Route("view-curriculum")]
+        [Authorize(Roles = "Student")]
+        public async Task<List<Discipline>> GetDisciplinesByYear()
+        {
+            //using the token, we check if the logged in user is chiefOfDepartment
+            String email = User.FindFirst("Email")?.Value;
+            if (email == null)
+                return null;
+
+            AcademicUser user = await _userManager.FindByNameAsync(email);
+            if (user == null)
+            {
+                return null;
+            }
+
+            if (user.Year != null)
+            {
+                int year = int.Parse(user.Year);
+                List<Discipline> disciplines = await _disciplineService.GetDisciplinesByYear(year);
+                return disciplines;
+            }
+            else
+            {
+                return null;
             }
         }
     }

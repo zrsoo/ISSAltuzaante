@@ -14,6 +14,7 @@ import UserController from "./controllers/UserController";
 import UpdateUser from "./components/Update/UpdateUser";
 import UpdatePassword from "./components/Update/UpdatePassword";
 import AproveOptionals from './components/AproveOptionals/AproveOptionals';
+import ViewCurriculum from './components/ViewCurriculum/ViewCurriculum';
 
 
 export default function App() {
@@ -43,7 +44,7 @@ export default function App() {
           <Route exact path="/updateuser" component={UpdateUser} />
           <Route exact path="/update-password" component={UpdatePassword} />
           <Route exact path="/aprove-optionals" component={AproveOptionals} />
-
+          <Route exact path="/view-curriculum" component={ViewCurriculum} />
         </Suspense>
       </div>
   )

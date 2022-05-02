@@ -2,6 +2,7 @@
 using AcademicInfo.Models;
 using AcademicInfo.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace AcademicInfo.Repository
 {
@@ -54,5 +55,9 @@ namespace AcademicInfo.Repository
             return await _dataContext.Set<Discipline>().FirstOrDefaultAsync(i => i.DisciplineId == id);
         }
 
+        public async Task<List<Discipline>> GetByYear(int year)
+        {
+            return await _dataContext.Set<Discipline>().Where(i => i.Year == year).ToListAsync();
+        }
     }
 }
