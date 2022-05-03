@@ -35,6 +35,7 @@ class DisciplineController {
         }
     }
 
+
     async getCurriculum(){
         if (this.token != null) {
             try {

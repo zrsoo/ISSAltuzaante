@@ -10,7 +10,7 @@ export default function AproveOptionals() {
     useEffect(() => {
       DisciplineController.getOptionalDisciplines().then((response) => {
         setOptionals(response);
-      console.log(response)
+      
     }, (error) => {
         console.log("ERROR ", error);
     });
@@ -34,19 +34,22 @@ export default function AproveOptionals() {
     }
 
     function renderTableData() {
-        return optionals.map((o, index) => {
-            return (
-                <tr key={index}>
-                    <td>{o.name}</td>
-                    <td>{o.isOptional}</td>
-                    <td>{o.facultyId}</td>
-                    <td>{o.numberOfStudents}</td>
-                    <td><input type='text' id={'optional ' + o.disciplineId} defaultValue={o.maxNumberOfStudents} onChange={e => setNewMaximum(parseInt(e.target.value))}></input></td>
-                    <td>{o.year}</td>
-                    <td><button className='btn btn-info' onClick={() => updateOptional(o)}>Update</button></td>
-                </tr>
-            )
-        })
+        if (optionals != null && optionals != [] && optionals.length > 0) {
+            return optionals.map((o, index) => {
+                return (
+                    <tr key={index}>
+                        <td>{o.name}</td>
+                        <td>{o.isOptional}</td>
+                        <td>{o.facultyId}</td>
+                        <td>{o.numberOfStudents}</td>
+                        <td><input type='text' id={'optional ' + o.disciplineId} defaultValue={o.maxNumberOfStudents} onChange={e => setNewMaximum(parseInt(e.target.value))}></input></td>
+                        <td>{o.year}</td>
+                        <td><button className='btn btn-info' onClick={() => updateOptional(o)}>Update</button></td>
+                    </tr>
+                )
+            })
+        }
+        
     }
 
     return (

@@ -18,6 +18,7 @@ export default function ViewCurriculum() {
 
     
     function renderTableData() {
+        if(disciplines!= null){
         return disciplines.map((o, index) => { 
             return (
                 <tr key={index}>
@@ -30,6 +31,7 @@ export default function ViewCurriculum() {
                 </tr>
             )
         })
+        }
     }
 
     return (
