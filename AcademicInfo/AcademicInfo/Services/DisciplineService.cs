@@ -75,5 +75,10 @@ namespace AcademicInfo.Services
             _disciplineRepository.Update(patchDiscipline);
             await _disciplineRepository.SaveChangesAsync();
         }
+
+        public async Task<List<Discipline>> GetDisciplinesByYear(int year)
+        {
+            return await _disciplineRepository.GetByYear(year);
+        }
     }
 }
