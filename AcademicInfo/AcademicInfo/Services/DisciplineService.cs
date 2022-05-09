@@ -18,6 +18,11 @@ namespace AcademicInfo.Services
             return await _disciplineRepository.GetAll();
         }
 
+        public IQueryable<Discipline> Get()
+        {
+            return _disciplineRepository.Get();
+        }
+
         public async Task<int> AddDiscipline(DisciplineDTO disciplineDTO)
         {
             if (disciplineDTO != null)
@@ -42,6 +47,38 @@ namespace AcademicInfo.Services
                 throw new ArgumentException("Could not save discipline!");
             }
 
+        }
+
+        public async Task UpdateDiscipline(Discipline discipline, int id)
+        {
+            if (discipline == null)
+            {
+                throw new ArgumentNullException("Discipline is null");
+            }
+
+            var patchDiscipline = await _disciplineRepository.GetByIdAsync(id);
+
+            if (patchDiscipline != null)
+            {
+                patchDiscipline.Name = discipline.Name;
+                patchDiscipline.FacultyId = discipline?.FacultyId;
+                patchDiscipline.NumberOfStudents = discipline?.NumberOfStudents ?? patchDiscipline.NumberOfStudents;
+                patchDiscipline.MaxNumberOfStudents = discipline?.MaxNumberOfStudents ?? patchDiscipline.MaxNumberOfStudents;
+                patchDiscipline.Year = discipline?.Year ?? patchDiscipline.Year;
+                patchDiscipline.IsOptional = discipline?.IsOptional ?? patchDiscipline.IsOptional;
+            }
+            else
+            {
+                throw new ArgumentNullException("Discipline is null");
+            }
+
+            _disciplineRepository.Update(patchDiscipline);
+            await _disciplineRepository.SaveChangesAsync();
+        }
+
+        public async Task<List<Discipline>> GetDisciplinesByYear(int year)
+        {
+            return await _disciplineRepository.GetByYear(year);
         }
     }
 }

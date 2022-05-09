@@ -15,10 +15,23 @@ export default function Home(props) {
                     <title>Home</title>
                 </Helmet>
                 <h1>Hello, {props.user.firstName}. Welcome to academic info!</h1>
+<<<<<<< HEAD
 
                 <div>
                     <Link to="/addOptionals">Add optionals</Link>
                 </div>
+=======
+                {props.user.isStudent === "Yes" &&
+                        <div>
+                            <Link to="/view-curriculum" className="btn btn-primary login-button">View Curriculum</Link>
+                        </div>
+                    }
+                      {props.user.isStudent === "No" &&
+                        <div>
+                             <Link to="/aprove-optionals" className="btn btn-primary login-button">Aprove-Optionals</Link>
+                        </div>
+                    }
+>>>>>>> origin/main
             </div>
         )   
     }

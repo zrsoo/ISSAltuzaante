@@ -13,7 +13,12 @@ import AuthenticationController from './controllers/AuthenticationController';
 import UserController from "./controllers/UserController";
 import UpdateUser from "./components/Update/UpdateUser";
 import UpdatePassword from "./components/Update/UpdatePassword";
+<<<<<<< HEAD
 import AddOptionals from './components/Optionals/addOptionals';
+=======
+import AproveOptionals from './components/AproveOptionals/AproveOptionals';
+import ViewCurriculum from './components/ViewCurriculum/ViewCurriculum';
+>>>>>>> origin/main
 
 
 export default function App() {
@@ -22,7 +27,8 @@ export default function App() {
   React.useEffect(() => {
     AuthenticationController.getUser().then((response) => {
       setUser(response);
-    console.log(response)});
+      //console.log(response)
+    });
     UserController.getUser().then((response) => {
       setUser(response);
       console.log(response)});
@@ -41,8 +47,13 @@ export default function App() {
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/updateuser" component={UpdateUser} />
           <Route exact path="/update-password" component={UpdatePassword} />
+<<<<<<< HEAD
           <Route exact path="/addOptionals" component={AddOptionals}/>
 
+=======
+          <Route exact path="/aprove-optionals" component={AproveOptionals} />
+          <Route exact path="/view-curriculum" component={ViewCurriculum} />
+>>>>>>> origin/main
         </Suspense>
       </div>
   )

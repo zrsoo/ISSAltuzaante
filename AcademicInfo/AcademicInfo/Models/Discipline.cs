@@ -10,7 +10,7 @@ public class Discipline
     [Required(ErrorMessage = "Name is required")]
     public string Name { get; set; }
     [Required(ErrorMessage = "Status is required")]
-    public string IsOptional { get; set; }
+    public bool IsOptional { get; set; }
     [Required(ErrorMessage = "Faculty is required")]
     [ForeignKey("Faculty")]
     public int? FacultyId { get; set; }
