@@ -13,7 +13,7 @@ import AuthenticationController from './controllers/AuthenticationController';
 import UserController from "./controllers/UserController";
 import UpdateUser from "./components/Update/UpdateUser";
 import UpdatePassword from "./components/Update/UpdatePassword";
-import AddOptionals from './components/Optionals/addOptionals';
+import AddOptionals from './components/Optionals/add-optionals';
 import AproveOptionals from './components/AproveOptionals/AproveOptionals';
 import ViewCurriculum from './components/ViewCurriculum/ViewCurriculum';
 
@@ -44,7 +44,7 @@ export default function App() {
           <Route exact path="/logout" component={Logout} />
           <Route exact path="/updateuser" component={UpdateUser} />
           <Route exact path="/update-password" component={UpdatePassword} />
-          <Route exact path="/addOptionals" component={AddOptionals}/>
+          <Route exact path="/add-optionals" component={AddOptionals}/>
           <Route exact path="/aprove-optionals" component={AproveOptionals} />
           <Route exact path="/view-curriculum" component={ViewCurriculum} />
         </Suspense>

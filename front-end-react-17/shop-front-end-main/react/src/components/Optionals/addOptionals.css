@@ -1,5 +1,17 @@
 .optionals-wrapper {
     width: 50%;
+    height: 35em;
     margin: auto;
-    background: brown;
+    margin-top: 2em;
+    border: 2px solid red;
+}
+
+.optionals-info-wrapper {
+    height: 30%;
+    border: 2px solid yellow;
+}
+
+.optionals-form-wrapper {
+    height: 70%;
+    border: 2px solid green;
 }

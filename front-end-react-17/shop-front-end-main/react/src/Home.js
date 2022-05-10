@@ -21,9 +21,10 @@ export default function Home(props) {
                             <Link to="/view-curriculum" className="btn btn-primary login-button">View Curriculum</Link>
                         </div>
                     }
-                      {props.user.isStudent === "No" &&
+                {props.user.isStudent === "No" &&
                         <div>
-                             <Link to="/aprove-optionals" className="btn btn-primary login-button">Aprove-Optionals</Link>
+                             <Link to="/aprove-optionals" className="btn btn-primary login-button">Approve-Optionals</Link>
+                             <Link to="/add-optionals" className='btn btn-primary login-button'>Add Optionals</Link>
                         </div>
                     }
             </div>
