@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicInfo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220501125547_update-isoptional")]
-    partial class updateisoptional
+    [Migration("20220511073509_allEntities")]
+    partial class allEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -250,6 +250,9 @@ namespace AcademicInfo.Migrations
 
                     b.Property<string>("NewPassword")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NewPasswordConfirm")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
