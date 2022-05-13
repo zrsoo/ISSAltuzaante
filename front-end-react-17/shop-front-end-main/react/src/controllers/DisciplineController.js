@@ -17,6 +17,24 @@ class DisciplineController {
         }
     }
 
+    async insertDiscipline(newDiscipline) {
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                console.log("new", newDiscipline);
+                const response = await axios.post('/discipline/save/', newDiscipline);
+
+                alert("Inserted discipline successfully!");
+            } catch (error) {
+                console.error("error-insert", error);
+                alert("Insert failed", error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async updateDiscipline(newDiscipline) {
         if (this.token != null) {
             try {
@@ -50,6 +68,5 @@ class DisciplineController {
             return null;
         }
     }
-
 }
 export default new DisciplineController();

@@ -5,6 +5,11 @@ import DisciplineController from '../../controllers/DisciplineController';
 
 export default function AddOptionals(props){
     const [optionals, setOptionals] = useState([]);
+    const [name, setName] = useState();
+    const [numberOfStudents, setNumberOfStudents] = useState();
+    const [maxNumberOfStudents, setMaxNumberOfStudents] = useState();
+    const [facultyId, setFacultyId] = useState();
+    const [year, setYear] = useState();
 
     useEffect(() => {
         DisciplineController.getOptionalDisciplines().then((response) => {
@@ -32,6 +37,21 @@ export default function AddOptionals(props){
         }
     }
 
+    function addOptional() {
+        const newDiscipline = {
+            name: name,
+            isOptional: true,
+            numberOfStudents: numberOfStudents,
+            maxNumberOfStudents: maxNumberOfStudents,
+            facultyId: facultyId,
+            year: year
+        }
+
+        DisciplineController.insertDiscipline(newDiscipline);
+        
+        console.log(DisciplineController.getOptionalDisciplines());
+    }
+
     return (
         <div className="optionals-wrapper">
             <div className='optionals-info-wrapper'>
@@ -44,16 +64,16 @@ export default function AddOptionals(props){
                     <fieldset>
                         <legend class="optionals-legend">Add optional</legend>
                         <label class="label" for="txtName">Name:</label>
-                        <input class="interactionTextInput" type="text" id="txtName"></input>
+                        <input class="interactionTextInput" type="text" id="txtName" onChange={e => setName(e.target.value)}></input>
                         <label class="label" for="txtFacultyId">FacultyId:</label>
-                        <input class="interactionTextInput" type="text" id="txtFacultyId"></input>
+                        <input class="interactionTextInput" type="text" id="txtFacultyId" onChange={e => setFacultyId(e.target.value)}></input>
                         <label class="label" for="txtNumberStudents">Number Of Students:</label>
-                        <input class="interactionTextInput" type="text" id="txtNumberStudents"></input>
+                        <input class="interactionTextInput" type="text" id="txtNumberStudents" onChange={e => setNumberOfStudents(e.target.value)}></input>
                         <label class="label" for="txtMaxNumberStudents">Maximum Number of Students:</label>
-                        <input class="interactionTextInput" type="text" id="txtMaxNumberStudents"></input>
+                        <input class="interactionTextInput" type="text" id="txtMaxNumberStudents" onChange={e => setMaxNumberOfStudents(e.target.value)}></input>
                         <label class="label" for="txtYear">Year:</label>
-                        <input class="interactionTextInput" type="text" id="txtYear"></input>
-                        <input class="submitButton" id="updateButton" type="button" value="Add optional"></input>
+                        <input class="interactionTextInput" type="text" id="txtYear" onChange={e => setYear(e.target.value)}></input>
+                        <input class="submitButton" id="updateButton" type="button" value="Add optional" onClick={() => addOptional()}></input>
                     </fieldset>
                 </form>
             </div>
@@ -77,4 +97,5 @@ export default function AddOptionals(props){
             </div>
         </div>   
     );
+
 }
