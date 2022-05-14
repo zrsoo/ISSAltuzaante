@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class allEntities : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,6 +38,7 @@ namespace AcademicInfo.Migrations
                     IsChiefOfDepartment = table.Column<bool>(type: "bit", nullable: true),
                     FacultyId = table.Column<int>(type: "int", nullable: true),
                     SpecializationId = table.Column<int>(type: "int", nullable: true),
+                    DisciplineId = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -68,7 +69,8 @@ namespace AcademicInfo.Migrations
                     FacultyId = table.Column<int>(type: "int", nullable: false),
                     NumberOfStudents = table.Column<int>(type: "int", nullable: false),
                     MaxNumberOfStudents = table.Column<int>(type: "int", nullable: false),
-                    Year = table.Column<int>(type: "int", nullable: false)
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    TeacherEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

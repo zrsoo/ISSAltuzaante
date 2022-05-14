@@ -18,6 +18,8 @@ public class Discipline
     public int NumberOfStudents { get; set; }
     public int MaxNumberOfStudents { get; set; }
     public int Year { get; set; }
+    
+    public string TeacherEmail { get; set; }
 
 
 }

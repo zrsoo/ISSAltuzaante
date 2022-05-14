@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicInfo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220511073509_allEntities")]
-    partial class allEntities
+    [Migration("20220514121927_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,9 @@ namespace AcademicInfo.Migrations
 
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DisciplineId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -144,6 +147,10 @@ namespace AcademicInfo.Migrations
 
                     b.Property<int>("NumberOfStudents")
                         .HasColumnType("int");
+
+                    b.Property<string>("TeacherEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");

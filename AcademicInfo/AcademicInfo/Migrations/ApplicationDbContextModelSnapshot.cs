@@ -40,6 +40,9 @@ namespace AcademicInfo.Migrations
                     b.Property<string>("Degree")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DisciplineId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -142,6 +145,10 @@ namespace AcademicInfo.Migrations
 
                     b.Property<int>("NumberOfStudents")
                         .HasColumnType("int");
+
+                    b.Property<string>("TeacherEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
