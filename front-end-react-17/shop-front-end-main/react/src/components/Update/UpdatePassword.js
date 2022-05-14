@@ -6,20 +6,17 @@ import UserController from "../../controllers/UserController";
 export default function UpdateUser() {
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
+    const [newPasswordConfirm, setNewPasswordConfirmation] = useState();
 
 
     const handleSubmit = e => {
-        if(document.getElementsByName("newPassInput").values()[0] !== document.getElementsByName("oldPassInput").values()[0]){
-            alert("The password doesn't match!")
-        }
-        else {
-            e.preventDefault();
-            const data = {
-                password: oldPassword,
-                newPassword: newPassword,
-            };
-            UserController.update_password(data);
-        }
+        e.preventDefault();
+        const data = {
+            password: oldPassword,
+            newPassword: newPassword,
+            newPasswordConfirm: newPasswordConfirm
+        };
+        UserController.update_password(data);
     };
 
     return (
@@ -39,14 +36,14 @@ export default function UpdateUser() {
 
                     <div className="form-group">
                         <label>New Password</label>
-                        <input name={"newPassInput"} type="password" className="form-control" placeholder="Password"
+                        <input type="password" className="form-control" placeholder="Password"
                                onChange={e => setNewPassword(e.target.value)} />
                     </div>
 
                     <div className="form-group">
                         <label>Repeat New Password</label>
-                        <input name={"oldPassInput"} type="password" className="form-control" placeholder="Repeat Password"
-                                />
+                        <input type="password" className="form-control" placeholder="Repeat Password"
+                               onChange={e => setNewPasswordConfirmation(e.target.value)}/>
                     </div>
                     <button className="btn btn-primary btn-block login-button">Update</button>
 

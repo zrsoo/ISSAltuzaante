@@ -11,5 +11,6 @@ namespace AcademicInfo.Models
 
         [Required(ErrorMessage = "A New Password is required")]
         public string? NewPassword { get; set; }
+        public string? NewPasswordConfirm { get; set; }
     }
 }

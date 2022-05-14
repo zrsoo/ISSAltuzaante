@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class updateisoptional : Migration
+    public partial class allEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -106,7 +106,8 @@ namespace AcademicInfo.Migrations
                 {
                     Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NewPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NewPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NewPasswordConfirm = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -80,15 +80,18 @@ namespace AcademicInfo.Controllers
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "The new password has to be different from the old one!" });
                 }
-                else
+                if (user.NewPassword != user.NewPasswordConfirm)
                 {
-                    var result = await _userService.UpdatePasswordAsync(user);
-                    if (result.Success == true)
-                    {
-                        return Ok(new Response { Success = true, Message = "User password updated successfully!" });
-                    }
-                    else return StatusCode(StatusCodes.Status500InternalServerError, result);
+                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "The password confirmation does not match the new password!" });
                 }
+
+                var result = await _userService.UpdatePasswordAsync(user);
+                if (result.Success == true)
+                {
+                    return Ok(new Response { Success = true, Message = "User password updated successfully!" });
+                }
+                else return StatusCode(StatusCodes.Status500InternalServerError, result);
+                
             }
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!", Errors = new List<string> { "Email doesn't exist!" } }); ;
         }
