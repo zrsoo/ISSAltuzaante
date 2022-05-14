@@ -31,7 +31,8 @@ namespace AcademicInfo.Services
                 {
                     Name = disciplineDTO.Name,
                     IsOptional = disciplineDTO.IsOptional,
-                    FacultyId = disciplineDTO.FacultyId
+                    FacultyId = disciplineDTO.FacultyId,
+                    Year = disciplineDTO.Year
                 };
                 
                 var result = _disciplineRepository.Insert(discipline);

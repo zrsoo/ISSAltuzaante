@@ -29,6 +29,7 @@ namespace AcademicInfo.Controllers
             try
             {
                 var id = await _disciplineService.AddDiscipline(disciplineDTO);
+
                 return Ok(new Response { Success = true, Message = "Inserted Discipline " + id + " successfully!" });
             }
 
