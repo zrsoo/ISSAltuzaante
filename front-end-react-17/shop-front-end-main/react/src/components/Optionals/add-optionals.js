@@ -6,8 +6,6 @@ import DisciplineController from '../../controllers/DisciplineController';
 export default function AddOptionals(props){
     const [optionals, setOptionals] = useState([]);
     const [name, setName] = useState();
-    const [numberOfStudents, setNumberOfStudents] = useState();
-    const [maxNumberOfStudents, setMaxNumberOfStudents] = useState();
     const [facultyId, setFacultyId] = useState();
     const [year, setYear] = useState();
 
@@ -26,7 +24,7 @@ export default function AddOptionals(props){
                 return (
                     <tr key={index}>
                         <td>{o.name}</td>
-                        <td>{o.isOptional}</td>
+                        <td>{o.isOptional.toString()}</td>
                         <td>{o.facultyId}</td>
                         <td>{o.numberOfStudents}</td>
                         <td>{o.maxNumberOfStudents}</td>
@@ -40,9 +38,7 @@ export default function AddOptionals(props){
     function addOptional() {
         const newDiscipline = {
             name: name,
-            isOptional: true,
-            numberOfStudents: numberOfStudents,
-            maxNumberOfStudents: maxNumberOfStudents,
+            isOptional: Boolean(true),
             facultyId: facultyId,
             year: year
         }
@@ -67,10 +63,6 @@ export default function AddOptionals(props){
                         <input class="interactionTextInput" type="text" id="txtName" onChange={e => setName(e.target.value)}></input>
                         <label class="label" for="txtFacultyId">FacultyId:</label>
                         <input class="interactionTextInput" type="text" id="txtFacultyId" onChange={e => setFacultyId(e.target.value)}></input>
-                        <label class="label" for="txtNumberStudents">Number Of Students:</label>
-                        <input class="interactionTextInput" type="text" id="txtNumberStudents" onChange={e => setNumberOfStudents(e.target.value)}></input>
-                        <label class="label" for="txtMaxNumberStudents">Maximum Number of Students:</label>
-                        <input class="interactionTextInput" type="text" id="txtMaxNumberStudents" onChange={e => setMaxNumberOfStudents(e.target.value)}></input>
                         <label class="label" for="txtYear">Year:</label>
                         <input class="interactionTextInput" type="text" id="txtYear" onChange={e => setYear(e.target.value)}></input>
                         <input class="submitButton" id="updateButton" type="button" value="Add optional" onClick={() => addOptional()}></input>
