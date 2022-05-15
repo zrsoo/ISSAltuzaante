@@ -21,6 +21,8 @@ builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<DisciplineRepository, DisciplineRepository>();
 builder.Services.AddScoped<DisciplineService, DisciplineService>();
+builder.Services.AddScoped<GradeRepository, GradeRepository>();
+builder.Services.AddScoped<GradeService, GradeService>();
 builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(

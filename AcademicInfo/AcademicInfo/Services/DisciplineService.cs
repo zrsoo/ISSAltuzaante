@@ -32,7 +32,9 @@ namespace AcademicInfo.Services
                     Name = disciplineDTO.Name,
                     IsOptional = disciplineDTO.IsOptional,
                     FacultyId = disciplineDTO.FacultyId,
-                    Year = disciplineDTO.Year
+                    Year = disciplineDTO.Year,
+                    TeacherEmail = disciplineDTO.TeacherEmail
+                   
                 };
                 
                 var result = _disciplineRepository.Insert(discipline);

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class Initial : Migration
+    public partial class grade3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,6 +88,22 @@ namespace AcademicInfo.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Faculties", x => x.FacultyId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Grades",
+                columns: table => new
+                {
+                    GradeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TeacherEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mark = table.Column<int>(type: "int", nullable: false),
+                    DisciplineId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grades", x => x.GradeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -346,6 +362,9 @@ namespace AcademicInfo.Migrations
 
             migrationBuilder.DropTable(
                 name: "Faculties");
+
+            migrationBuilder.DropTable(
+                name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "Logins");

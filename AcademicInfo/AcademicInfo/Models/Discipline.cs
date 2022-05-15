@@ -19,7 +19,7 @@ public class Discipline
     public int MaxNumberOfStudents { get; set; }
     public int Year { get; set; }
     
-    public string TeacherEmail { get; set; }
+    public string TeacherEmail { get; set; } = string.Empty;
 
 
 }

@@ -175,6 +175,33 @@ namespace AcademicInfo.Migrations
                     b.ToTable("Faculties");
                 });
 
+            modelBuilder.Entity("AcademicInfo.Models.Grade", b =>
+                {
+                    b.Property<int>("GradeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradeId"), 1L, 1);
+
+                    b.Property<int>("DisciplineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Mark")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GradeId");
+
+                    b.ToTable("Grades");
+                });
+
             modelBuilder.Entity("AcademicInfo.Models.LoginModel", b =>
                 {
                     b.Property<string>("Email")

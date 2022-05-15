@@ -29,6 +29,7 @@ export default function AddOptionals(props){
                         <td>{o.numberOfStudents}</td>
                         <td>{o.maxNumberOfStudents}</td>
                         <td>{o.year}</td>
+                        <td>{o.teacherEmail}</td>
                     </tr>
                 )
             })
@@ -40,12 +41,15 @@ export default function AddOptionals(props){
             name: name,
             isOptional: Boolean(true),
             facultyId: facultyId,
-            year: year
+            year: year,
+            teacherEmail: props.user.email
         }
 
-        DisciplineController.insertDiscipline(newDiscipline);
+        console.log("NEW DISC", newDiscipline);
+
+       DisciplineController.insertDiscipline(newDiscipline);
         
-        console.log(DisciplineController.getOptionalDisciplines());
+       console.log(DisciplineController.getOptionalDisciplines());
     }
 
     return (
@@ -80,6 +84,7 @@ export default function AddOptionals(props){
                             <th>Number of students</th>
                             <th>Maximum number of students</th>
                             <th>Year</th>
+                            <th>Teacher</th>
                         </tr>
                     </thead>
                     <tbody>

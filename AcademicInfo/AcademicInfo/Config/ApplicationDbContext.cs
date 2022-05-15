@@ -27,6 +27,7 @@ namespace AcademicInfo.Config
         public virtual DbSet<Specialization> Specializations { get; set; } = null!;
         public virtual DbSet<Faculty> Faculties { get; set; } = null!;
         public virtual DbSet<Discipline> Disciplines { get; set; } = null!;
+        public virtual DbSet<Grade> Grades { get; set; } = null!;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
