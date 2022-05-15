@@ -17,6 +17,36 @@ class DisciplineController {
         }
     }
 
+    async getStudentsForCurrentDiscipline(id){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/'+ id + '/students');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async getTeacherDisciplines(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/teacher');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async insertDiscipline(newDiscipline) {
         if (this.token != null) {
             try {
