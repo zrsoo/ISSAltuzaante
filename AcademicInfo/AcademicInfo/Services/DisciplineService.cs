@@ -83,5 +83,10 @@ namespace AcademicInfo.Services
         {
             return await _disciplineRepository.GetByYear(year);
         }
+
+        public async Task<Discipline> GetById(int id)
+        {
+            return await _disciplineRepository.GetByIdAsync(id);
+        }
     }
 }

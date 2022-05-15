@@ -16,7 +16,9 @@ import UpdatePassword from "./components/Update/UpdatePassword";
 import AddOptionals from './components/Optionals/add-optionals';
 import AproveOptionals from './components/AproveOptionals/AproveOptionals';
 import ViewCurriculum from './components/ViewCurriculum/ViewCurriculum';
-
+import ViewDisciplinesPerTeacher from './components/ViewDisciplinesPerTeacher/ViewDisciplinesPerTeacher';
+import ViewStudentsPerDiscipline from './components/ViewStudentsPerDiscipline/ViewStudentsPerDiscipline';
+import ViewGrades from './components/ViewGrades/ViewGrades';
 
 export default function App() {
   const [user, setUser] = React.useState();
@@ -47,6 +49,9 @@ export default function App() {
           <Route exact path="/add-optionals" component={() => <AddOptionals user={user}/>} />
           <Route exact path="/aprove-optionals" component={AproveOptionals} />
           <Route exact path="/view-curriculum" component={ViewCurriculum} />
+          <Route exact path="/view-disciplines-teacher" component={ViewDisciplinesPerTeacher} />`
+          <Route exact path="/discipline/:id/students" component={ViewStudentsPerDiscipline} />
+          <Route exact path="/grades" component={ViewGrades} />
         </Suspense>
       </div>
   )

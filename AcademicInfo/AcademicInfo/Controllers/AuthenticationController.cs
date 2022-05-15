@@ -89,7 +89,8 @@ namespace AcademicInfo.Controllers
                 UserName = model.Email,
                 City = model.City,
                 Year = model.Year.ToString(),
-                SpecializationId = model.SpecializationId 
+                SpecializationId = model.SpecializationId,
+                FacultyId = model.SpecializationId
             };
 
             var result = await _userManager.CreateAsync(student, model.Password);

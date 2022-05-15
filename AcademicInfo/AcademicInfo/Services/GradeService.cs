@@ -22,9 +22,15 @@ namespace AcademicInfo.Services
             return _gradeRepository.Get();
         }
 
-        public async Task<int> AddGrade()
+        public async Task<int> AddGrade(Grade grade)
         {
-            throw new NotImplementedException();
+            var result = _gradeRepository.Insert(grade);
+            if (result != null)
+            {
+                _gradeRepository.SaveChanges();
+            }
+
+            return result.GradeId;
         }
 
         public async Task UpdateGrade(Grade grade, int id)
