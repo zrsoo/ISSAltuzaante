@@ -100,7 +100,16 @@ namespace AcademicInfo.Services
 
             return token;
         }
-
+        
+        public async Task<List<AcademicUser>> GetAllStudents()
+        {
+            return await _userRepo.GetAll();
+        }
+        
+        public async Task<List<Grade>> GetAllGrades()
+        {
+            return await _userRepo.GetAllGrades();
+        }
         
     }
 }

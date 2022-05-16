@@ -19,6 +19,12 @@ export default function Home(props) {
                             <Link to="/grades" className="btn btn-primary login-button">View Grades</Link>
                         </div>
                     }
+                {props.user.isStudent === "Admin" &&
+                    <div>
+                        HELLO ADMIN
+                        <Link to="/groupGrades" className="btn btn-primary login-button">View group statistics</Link>
+                    </div>
+                }
                 {props.user.isStudent === "No" &&
                         <div>
                              <div><Link to="/aprove-optionals" className="btn btn-primary login-button">Approve-Optionals</Link></div>

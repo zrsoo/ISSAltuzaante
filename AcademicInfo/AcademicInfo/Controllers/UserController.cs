@@ -19,7 +19,8 @@ namespace AcademicInfo.Controllers
         private readonly ICurrentUserService _currentUserService;
         private readonly ApplicationDbContext _dbContext;
 
-        public UserController(UserManager<AcademicUser> userManager, IUserService userService, ICurrentUserService currentUserService, ApplicationDbContext dbContext)
+        public UserController(UserManager<AcademicUser> userManager, IUserService userService,
+            ICurrentUserService currentUserService, ApplicationDbContext dbContext)
         {
             _userService = userService;
             _userManager = userManager;
@@ -63,7 +64,9 @@ namespace AcademicInfo.Controllers
                     });
                 }
             }
-            else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!" });
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response { Success = false, Message = "Error updating user!" });
         }
 
         [HttpPatch]
@@ -78,11 +81,18 @@ namespace AcademicInfo.Controllers
             {
                 if (user.NewPassword == user.Password)
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "The new password has to be different from the old one!" });
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        new Response
+                            { Success = false, Message = "The new password has to be different from the old one!" });
                 }
+
                 if (user.NewPassword != user.NewPasswordConfirm)
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "The password confirmation does not match the new password!" });
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        new Response
+                        {
+                            Success = false, Message = "The password confirmation does not match the new password!"
+                        });
                 }
 
                 var result = await _userService.UpdatePasswordAsync(user);
@@ -91,9 +101,17 @@ namespace AcademicInfo.Controllers
                     return Ok(new Response { Success = true, Message = "User password updated successfully!" });
                 }
                 else return StatusCode(StatusCodes.Status500InternalServerError, result);
-                
+
             }
-            else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!", Errors = new List<string> { "Email doesn't exist!" } }); ;
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    new Response
+                    {
+                        Success = false, Message = "Error updating user!",
+                        Errors = new List<string> { "Email doesn't exist!" }
+                    });
+
+            ;
         }
 
         [HttpGet]
@@ -111,5 +129,21 @@ namespace AcademicInfo.Controllers
 
             return StatusCode(200, _currentUserService.GetUserId());
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("group-statistics/{specializationId}")]
+        public async Task<List<Grade>> GetStatistics(int specializationId)
+        {
+            List<AcademicUser> students_unfiltered = await _userService.GetAllStudents();
+            var students = students_unfiltered.FindAll(s => s.SpecializationId == specializationId);
+            List<Grade> grades = await _userService.GetAllGrades();
+            var ordered_grades = grades.OrderByDescending(g => g.Mark).ToList();
+            var kept_grades = ordered_grades.FindAll(g => students.FindIndex(o => o.Email == g.StudentEmail) >= 0);
+
+            return kept_grades;
+        }
     }
+
+
 }

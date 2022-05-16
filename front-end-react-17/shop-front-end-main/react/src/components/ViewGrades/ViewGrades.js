@@ -3,6 +3,7 @@ import "../AproveOptionals/AproveOptionals.css";
 import DisciplineController from '../../controllers/DisciplineController';
 import { useState, useEffect } from 'react';
 import GradeController from '../../controllers/GradeController';
+import UserController from "../../controllers/UserController";
 
 export default function ViewGrades() {
     const [grades, setGrades] = useState([]);
@@ -10,11 +11,13 @@ export default function ViewGrades() {
     useEffect(() => {
       GradeController.getGrades().then((response) => {
         setGrades(response);
-      
+
     }, (error) => {
         console.log("ERROR ", error);
     });
     } ,[]);
+
+
 
 
     function renderTableData() {

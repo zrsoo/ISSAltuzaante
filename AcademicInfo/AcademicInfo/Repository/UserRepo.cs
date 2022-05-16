@@ -54,5 +54,20 @@ namespace AcademicInfo.Repository
             }
             return false;
         }
+        
+        public async Task<List<AcademicUser>> GetAllStudents()
+        {
+            return dbContext.Students.ToList();
+        }
+        
+        public async Task<List<AcademicUser>> GetAll()
+        {
+            return await dbContext.Set<AcademicUser>().ToListAsync();
+        }
+        
+        public async Task<List<Grade>> GetAllGrades()
+        {
+            return await dbContext.Set<Grade>().ToListAsync();
+        }
     }
 }

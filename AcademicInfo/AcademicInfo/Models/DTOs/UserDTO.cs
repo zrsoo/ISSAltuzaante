@@ -12,8 +12,10 @@
             this.Email = user.Email;
             this.FirstName = user.FirstName;
             this.LastName = user.LastName;
-            if (user.Degree != null)
+            if (user.Degree != null && user.Degree != "Admin")
                 this.IsStudent = "No";
+            else if (user.Degree != null && user.Degree == "Admin")
+                this.IsStudent = "Admin";
             else
                 this.IsStudent = "Yes";
         }

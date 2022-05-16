@@ -42,5 +42,21 @@ class UserController {
             return null;
         }
     }
+
+    async getStatistics(id){
+        if (localStorage.getItem('token') != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+                const response = await axios.get('/User/group-statistics/' + id);
+                //console.log(response);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
 }
 export default new UserController();
