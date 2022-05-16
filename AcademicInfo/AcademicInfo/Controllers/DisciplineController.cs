@@ -14,12 +14,13 @@ namespace AcademicInfo.Controllers
     {
         private readonly DisciplineService _disciplineService;
         private readonly UserManager<AcademicUser> _userManager;
+        private readonly IUserService _userService;
 
-
-        public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager)
+        public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager, IUserService userService)
         {
             _disciplineService = disciplineService;
             _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -140,21 +141,42 @@ namespace AcademicInfo.Controllers
             return disciplines.FindAll(d => d.IsOptional == true && d.Year == year);
             
         }
-        /*
-        [HttpPost]
+
+
+        [HttpPatch]
         [Route("assign-optional")]
-        public async Task<IActionResult> AssignOptional([FromBody] List<int> optionalIds)
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> AssignOptional([FromBody] List<PreferenceDTO> preferences)
         {
-            int optional = 0;
+
+            var l = preferences.OrderByDescending(e => e.Preference).ToList();
+
+            int? optional = -1;
             List<Discipline> disciplines = await _disciplineService.GetAll();
-            for(int i=0; i < optionalIds.Count; i++)
-            {
-                if(disciplines.FindLast(d => d.MaxNumberOfStudents > d.NumberOfStudents && d.DisciplineId == optionalIds[i]) != null){
-                    optional = optionalIds[i];
+            for(int i=0; i < l.Count(); i++)
+            {   
+                if(disciplines.FindLast(d => d.MaxNumberOfStudents > d.NumberOfStudents && d.DisciplineId == l[i].OptionalId) != null){
+                    optional = l[i].OptionalId;
+                    break;
                 }
             }
+            Console.WriteLine(optional);
+            if (optional != -1)
+            {
+                String email = User.FindFirst("Email")?.Value;
+                if (email == null)
+                    return null;
+                await _userService.UpdateDisciplineAsync(email, (int)optional);
+                return Ok(new Response { Success = true, Message = "Assigned discipline" + optional + " successfully!" });
+            }
+            else
+                return BadRequest(new Response
+                {
+                    Success = false,
+                    Message = "All discipline are not available"
+                });
 
         }
-        */
+        
     }
 }

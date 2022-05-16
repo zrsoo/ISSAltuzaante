@@ -113,5 +113,24 @@ class DisciplineController {
             return null;
         }
     }
+
+    async assignOptionalForStudent(preferences) {
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                console.log(preferences);
+                const response = await axios.patch('/discipline/assign-optional/', preferences);
+
+                alert("Assigned successfully!");
+            } catch (error) {
+                console.error("eroare-assign", error);
+                alert("Assign failed", error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
 }
 export default new DisciplineController();

@@ -17,9 +17,8 @@ export default function ViewOptionals() {
             console.log("ERROR ", error);
       });
       } ,[]);
-
-
     
+
     function renderTableData() {
         if(optionals!= null){
         return optionals.map((o, index) => { 
@@ -33,6 +32,7 @@ export default function ViewOptionals() {
                     <td><input type="text" onChange={e => saveOpPref(e.target.value) }></input></td>
                     <td><button className='btn btn-info' onClick={() => {const dict = preferences.concat({ optionalId: o.disciplineId, preference: opPref }); setPreferences(dict); console.log(preferences);}}>Set Preference</button></td>
                 </tr>
+                
             )
         })
         }
@@ -54,10 +54,19 @@ export default function ViewOptionals() {
                 </thead>
                 <tbody>
                   {renderTableData()}
+                  
                 </tbody>
+               
             </table>
+
           <h2>{}</h2>
+          <button className='btn btn-info' onClick={() => {assignOptional()}}>Save</button>
         </div>
 
     );
+
+    function assignOptional(){
+        DisciplineController.assignOptionalForStudent(preferences);
+        setPreferences({optionalId:-1, preference:-1});
+    };
 }

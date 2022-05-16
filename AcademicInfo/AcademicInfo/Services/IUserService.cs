@@ -12,6 +12,9 @@ namespace AcademicInfo.Services
 
         public Task<JwtSecurityToken> GenerateJwt(AcademicUser user);
 
+        public Task UpdateDisciplineAsync(String email, int optionalId);
+
+        
 
     }
 }

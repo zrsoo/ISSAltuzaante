@@ -101,6 +101,12 @@ namespace AcademicInfo.Services
             return token;
         }
 
-        
+        public async Task UpdateDisciplineAsync(String email, int optionalId)
+        {
+            await _userRepo.UpdateDisciplineAsync(email, optionalId);
+        }
+
+
+
     }
 }
