@@ -24,6 +24,7 @@ export default function Home(props) {
                         HELLO ADMIN<br/>
                         <Link to="/groupGrades" className="btn btn-primary login-button">View all grades per group</Link>
                         <Link to="/yearGrades" className="btn btn-primary login-button">View year leaderboard</Link>
+                        <Link to="/grantScholarships" className="btn btn-primary login-button">Grant scholarships</Link>
                     </div>
                 }
                 {props.user.isStudent === "No" &&

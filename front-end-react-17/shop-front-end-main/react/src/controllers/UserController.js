@@ -74,5 +74,21 @@ class UserController {
             return null;
         }
     }
+
+    async grantScholarships(id){
+        if (localStorage.getItem('token') != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+                const response = await axios.get('/User/grant-scholarships/' + id);
+                //console.log(response);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
 }
 export default new UserController();

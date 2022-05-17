@@ -21,6 +21,7 @@ import ViewStudentsPerDiscipline from './components/ViewStudentsPerDiscipline/Vi
 import ViewGrades from './components/ViewGrades/ViewGrades';
 import GroupGrades from './components/GroupGrades/GroupGrades';
 import YearGrades from "./components/YearGrades/YearGrades";
+import GrantScholarships from "./components/ViewScholarships/ViewScholarships";
 export default function App() {
   const [user, setUser] = React.useState();
   
@@ -55,6 +56,7 @@ export default function App() {
           <Route exact path="/grades" component={ViewGrades} />
           <Route exact path="/groupGrades" component={GroupGrades} />
           <Route exact path="/yearGrades" component={YearGrades} />
+          <Route exact path="/grantScholarships" component={GrantScholarships} />
         </Suspense>
       </div>
   )

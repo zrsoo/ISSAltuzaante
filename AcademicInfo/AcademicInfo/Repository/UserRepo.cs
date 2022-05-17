@@ -1,6 +1,7 @@
 ﻿using AcademicInfo.Config;
 using AcademicInfo.Models;
 using AcademicInfo.Models.DTOs;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -76,8 +77,9 @@ namespace AcademicInfo.Repository
             //(from p in dbContext.Students
               //      where keptGrades.FindIndex(f => f.ID == p.Email) >= 0 select p).ToList()
                 //.ForEach(x => x.PhoneNumber = "scholarship");
-                List<AcademicUser> results = (from p in dbContext.Students
-                    where keptGrades.FindIndex(f => f.ID == p.Email) >= 0
+                
+                var student_list = dbContext.Students.ToList().Where(s => keptGrades.FindIndex(f => f.ID == s.Email) >= 0).ToList();
+                List<AcademicUser> results = (from p in student_list
                     select p).ToList();
 
                 foreach (AcademicUser p in results)
