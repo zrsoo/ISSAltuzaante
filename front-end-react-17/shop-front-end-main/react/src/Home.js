@@ -17,6 +17,7 @@ export default function Home(props) {
                         <div>
                             <Link to="/view-curriculum" className="btn btn-primary login-button">View Curriculum</Link>
                             <Link to="/grades" className="btn btn-primary login-button">View Grades</Link>
+                            <Link to="/view-optionals" className="btn btn-primary login-button">View Optionals</Link>
                         </div>
                     }
                 {props.user.isStudent === "No" &&

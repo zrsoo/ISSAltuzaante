@@ -25,7 +25,6 @@ export default function ViewOptionals() {
             return (
                 <tr key={index}>
                     <td>{o.name}</td>
-                    <td>{o.isOptional}</td>
                     <td>{o.facultyId}</td>
                     <td>{o.numberOfStudents}</td>
                     <td>{o.maxNumberOfStudents}</td>
@@ -44,12 +43,12 @@ export default function ViewOptionals() {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>IsOptional</th>
                         <th>FacultyId</th>
                         <th>Number of students</th>
                         <th>Maximum number of students</th>
-                        <th>Year</th>
+                        
                         <th>Preference</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
