@@ -143,6 +143,49 @@ namespace AcademicInfo.Controllers
 
             return kept_grades;
         }
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("year-statistics/{year}")]
+        public async Task<List<GradeDTO>> GetStatisticsYear(int year)
+        {
+            List<AcademicUser> students_unfiltered = await _userService.GetAllStudents();
+            var students = students_unfiltered.FindAll(s => s.Year == year.ToString());
+            List<Grade> grades = await _userService.GetAllGrades();
+            // group by statement
+            var avg_grades = grades.GroupBy(t => new { ID = t.StudentEmail })
+                .Select(g => new GradeDTO
+                {
+                    Average = g.Average(p => p.Mark),
+                    ID = g.Key.ID
+                });
+            var ordered_grades = avg_grades.OrderByDescending(g => g.Average).ToList();
+            var kept_grades = ordered_grades.FindAll(g => students.FindIndex(o => o.Email == g.ID) >= 0);
+
+            return kept_grades;
+        }
+        
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("grant-scholarships/{year}")]
+        public async Task<List<AcademicUser>> GrantScholarships(int year)
+        {
+            List<AcademicUser> students_unfiltered = await _userService.GetAllStudents();
+            var students = students_unfiltered.FindAll(s => s.Year == year.ToString());
+            List<Grade> grades = await _userService.GetAllGrades();
+            // group by statement (top 10 students per year)
+            var avg_grades = grades.GroupBy(t => new { ID = t.StudentEmail })
+                .Select(g => new GradeDTO
+                {
+                    Average = g.Average(p => p.Mark),
+                    ID = g.Key.ID
+                });
+            var ordered_grades = avg_grades.OrderByDescending(g => g.Average).ToList().Take(10).ToList(); //top 10 students
+            var kept_grades = ordered_grades.FindAll(g => students.FindIndex(o => o.Email == g.ID) >= 0);
+            await _userService.grantScholarships(kept_grades);
+
+            return students.FindAll(s=>s.PhoneNumber == "scholarship");
+        }
     }
 
 

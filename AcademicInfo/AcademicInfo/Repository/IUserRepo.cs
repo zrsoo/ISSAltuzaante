@@ -1,4 +1,5 @@
 ﻿using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 
 namespace AcademicInfo.Repository
 {
@@ -14,5 +15,6 @@ namespace AcademicInfo.Repository
         Task<List<AcademicUser>> GetAll();
         
         Task<List<Grade>> GetAllGrades();
+        Task grantScholarships(List<GradeDTO> keptGrades);
     }
 }

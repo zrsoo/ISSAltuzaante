@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import GradeController from '../../controllers/GradeController';
 import UserController from "../../controllers/UserController";
 
-export default function GroupGrades() {
+export default function YearGrades() {
     const [grades, setGrades] = useState([]);
     const [specialization, setSpecialization] = useState();
 
@@ -14,9 +14,9 @@ export default function GroupGrades() {
         const data = {
             specializationId: specialization,
         };
-        UserController.getStatistics(data.specializationId).then((response) => {
+        UserController.getStatisticsYear(data.specializationId).then((response) => {
             setGrades(response);
-    })
+        })
     }
 
     useEffect(() => {
@@ -39,9 +39,8 @@ export default function GroupGrades() {
             return grades.map((o, index) => {
                 return (
                     <tr key={index}>
-                        <td>{o.disciplineId}</td>
-                        <td>{o.studentEmail}</td>
-                        <td>{o.mark}</td>
+                        <td>{o.id}</td>
+                        <td>{o.average}</td>
                     </tr>
                 )
             })
@@ -52,19 +51,18 @@ export default function GroupGrades() {
     return (
         <div className='optionals'>
             <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Group Id</label>
-                <input type="text" className="form-control" placeholder="Group Id"
-                       onChange={e => setSpecialization(e.target.value)} />
-            </div>
+                <div className="form-group">
+                    <label>Year</label>
+                    <input type="text" className="form-control" placeholder="Year"
+                           onChange={e => setSpecialization(e.target.value)} />
+                </div>
                 <button className="btn btn-primary btn-block login-button">Submit</button>
             </form>
             <table className='table table-striped'>
                 <thead>
                 <tr>
-                    <th>DisciplineId</th>
                     <th>Student</th>
-                    <th>Grade</th>
+                    <th>Average Grade</th>
                 </tr>
                 </thead>
                 <tbody>

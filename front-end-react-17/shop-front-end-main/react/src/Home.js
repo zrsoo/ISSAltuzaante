@@ -21,8 +21,9 @@ export default function Home(props) {
                     }
                 {props.user.isStudent === "Admin" &&
                     <div>
-                        HELLO ADMIN
-                        <Link to="/groupGrades" className="btn btn-primary login-button">View group statistics</Link>
+                        HELLO ADMIN<br/>
+                        <Link to="/groupGrades" className="btn btn-primary login-button">View all grades per group</Link>
+                        <Link to="/yearGrades" className="btn btn-primary login-button">View year leaderboard</Link>
                     </div>
                 }
                 {props.user.isStudent === "No" &&

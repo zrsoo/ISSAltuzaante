@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 
 namespace AcademicInfo.Services
 {
@@ -17,5 +18,6 @@ namespace AcademicInfo.Services
         public Task<List<Grade>> GetAllGrades();
 
 
+        Task grantScholarships(List<GradeDTO> keptGrades);
     }
 }

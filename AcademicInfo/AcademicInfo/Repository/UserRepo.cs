@@ -1,5 +1,6 @@
 ﻿using AcademicInfo.Config;
 using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -68,6 +69,23 @@ namespace AcademicInfo.Repository
         public async Task<List<Grade>> GetAllGrades()
         {
             return await dbContext.Set<Grade>().ToListAsync();
+        }
+
+        public async Task grantScholarships(List<GradeDTO> keptGrades)
+        {
+            //(from p in dbContext.Students
+              //      where keptGrades.FindIndex(f => f.ID == p.Email) >= 0 select p).ToList()
+                //.ForEach(x => x.PhoneNumber = "scholarship");
+                List<AcademicUser> results = (from p in dbContext.Students
+                    where keptGrades.FindIndex(f => f.ID == p.Email) >= 0
+                    select p).ToList();
+
+                foreach (AcademicUser p in results)
+                {
+                    p.PhoneNumber = "scholarship";
+                }
+
+                dbContext.SaveChanges();
         }
     }
 }

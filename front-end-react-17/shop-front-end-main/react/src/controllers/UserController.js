@@ -58,5 +58,21 @@ class UserController {
             return null;
         }
     }
+
+    async getStatisticsYear(id){
+        if (localStorage.getItem('token') != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+                const response = await axios.get('/User/year-statistics/' + id);
+                //console.log(response);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
 }
 export default new UserController();

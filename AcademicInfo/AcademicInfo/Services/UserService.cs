@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 using AcademicInfo.Repository;
 
 namespace AcademicInfo.Services
@@ -109,6 +110,11 @@ namespace AcademicInfo.Services
         public async Task<List<Grade>> GetAllGrades()
         {
             return await _userRepo.GetAllGrades();
+        }
+
+        public async Task grantScholarships(List<GradeDTO> keptGrades)
+        {
+            await _userRepo.grantScholarships(keptGrades);
         }
         
     }
