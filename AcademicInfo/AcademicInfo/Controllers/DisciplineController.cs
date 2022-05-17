@@ -14,12 +14,13 @@ namespace AcademicInfo.Controllers
     {
         private readonly DisciplineService _disciplineService;
         private readonly UserManager<AcademicUser> _userManager;
+        private readonly IUserService _userService;
 
-
-        public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager)
+        public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager, IUserService userService)
         {
             _disciplineService = disciplineService;
             _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpPost]
@@ -117,49 +118,65 @@ namespace AcademicInfo.Controllers
                 return null;
             }
         }
+
         [HttpGet]
-        [Route("teacher")]
-        [Authorize(Roles = "Teacher")]
-        public async Task<List<Discipline>> getDisciplinesByTeacher()
+        [Route("view-optionals")]
+        [Authorize(Roles = "Student")]
+        public async Task<List<Discipline>> viewOptionals()
         {
-            //using the token, we find current teacher's email
+            //using the token, we check if the logged in user is chiefOfDepartment
             String email = User.FindFirst("Email")?.Value;
             if (email == null)
                 return null;
 
-            List<Discipline> disciplines = await _disciplineService.GetAll();
-            return disciplines.FindAll(d => d.TeacherEmail == email);
-
-        }
-
-        [HttpGet]
-        [Route("{disciplineId}/students")]
-        [Authorize(Roles = "Teacher")]
-        public async Task<List<UserDTO>> getStudentsForCurrentDiscipline(int disciplineId)
-        {
-            //using the token, we find current teacher's email
-            //String email = User.FindFirst("Email")?.Value;
-            //if (email == null)
-            //    return null;
-
-            Discipline discipline = await _disciplineService.GetById(disciplineId);
-            List<AcademicUser> users = await _userManager.Users.ToListAsync();
-            List<UserDTO> result = new List<UserDTO>();
-            if (users != null)
+            AcademicUser user = await _userManager.FindByNameAsync(email);
+            if (user == null)
             {
-                foreach (var user in users)
-                {
-                    if (user.DisciplineId == discipline.DisciplineId)
-                        result.Add(new UserDTO(user));
-
-                    if (user.Year == discipline.Year.ToString() && user.FacultyId == discipline.FacultyId)
-                        result.Add(new UserDTO(user));
-                }
+                return null;
             }
 
-            return result;
+            int year = int.Parse(user.Year);
+
+            List<Discipline> disciplines = await _disciplineService.GetAll();
+            return disciplines.FindAll(d => d.IsOptional == true && d.Year == year);
+            
+        }
+
+
+        [HttpPatch]
+        [Route("assign-optional")]
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> AssignOptional([FromBody] List<PreferenceDTO> preferences)
+        {
+
+            var l = preferences.OrderByDescending(e => e.Preference).ToList();
+
+            int? optional = -1;
+            List<Discipline> disciplines = await _disciplineService.GetAll();
+            for(int i=0; i < l.Count(); i++)
+            {   
+                if(disciplines.FindLast(d => d.MaxNumberOfStudents > d.NumberOfStudents && d.DisciplineId == l[i].OptionalId) != null){
+                    optional = l[i].OptionalId;
+                    break;
+                }
+            }
+            Console.WriteLine(optional);
+            if (optional != -1)
+            {
+                String email = User.FindFirst("Email")?.Value;
+                if (email == null)
+                    return null;
+                await _userService.UpdateDisciplineAsync(email, (int)optional);
+                return Ok(new Response { Success = true, Message = "Assigned discipline" + optional + " successfully!" });
+            }
+            else
+                return BadRequest(new Response
+                {
+                    Success = false,
+                    Message = "All discipline are not available"
+                });
 
         }
+        
     }
-
 }

@@ -16,8 +16,9 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<DisciplineRepository, DisciplineRepository>();
 builder.Services.AddScoped<DisciplineService, DisciplineService>();

@@ -54,5 +54,13 @@ namespace AcademicInfo.Repository
             }
             return false;
         }
+
+        public async Task UpdateDisciplineAsync(string email, int optionalId)
+        {
+            AcademicUser dbUser = await dbContext.Users.FirstAsync(user => user.Email == email);
+            dbUser.DisciplineId = optionalId;
+            await dbContext.SaveChangesAsync();
+            
+        }
     }
 }
