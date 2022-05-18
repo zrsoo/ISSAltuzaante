@@ -167,6 +167,9 @@ namespace AcademicInfo.Controllers
                 if (email == null)
                     return null;
                 await _userService.UpdateDisciplineAsync(email, (int)optional);
+
+                await _disciplineService.IncreaseOptionalDiscipline((int)optional);
+
                 return Ok(new Response { Success = true, Message = "Assigned discipline" + optional + " successfully!" });
             }
             else

@@ -88,5 +88,24 @@ namespace AcademicInfo.Services
         {
             return await _disciplineRepository.GetByIdAsync(id);
         }
+
+        public async Task IncreaseOptionalDiscipline(int id)
+        {
+            
+            var patchDiscipline = await _disciplineRepository.GetByIdAsync(id);
+
+            if (patchDiscipline != null)
+            {
+                patchDiscipline.NumberOfStudents = patchDiscipline.NumberOfStudents +  1;
+   
+            }
+            else
+            {
+                throw new ArgumentNullException("Discipline is null");
+            }
+
+            _disciplineRepository.Update(patchDiscipline);
+            await _disciplineRepository.SaveChangesAsync();
+        }
     }
 }
