@@ -4,6 +4,7 @@ import DisciplineController from '../../controllers/DisciplineController';
 import { useState, useEffect } from 'react';
 import GradeController from '../../controllers/GradeController';
 import UserController from "../../controllers/UserController";
+import {CSVLink} from "react-csv/lib";
 
 export default function YearGrades() {
     const [grades, setGrades] = useState([]);
@@ -69,6 +70,7 @@ export default function YearGrades() {
                 {renderTableData()}
                 </tbody>
             </table>
+            <CSVLink data={grades.map(({id, average}) => ({id, average}))}>Download me</CSVLink>
             <h2>{}</h2>
         </div>
 

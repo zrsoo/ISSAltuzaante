@@ -156,7 +156,7 @@ namespace AcademicInfo.Controllers
             var avg_grades = grades.GroupBy(t => new { ID = t.StudentEmail })
                 .Select(g => new GradeDTO
                 {
-                    Average = g.Average(p => p.Mark),
+                    Average = Convert.ToInt32(g.Average(p => p.Mark)),
                     ID = g.Key.ID
                 });
             var ordered_grades = avg_grades.OrderByDescending(g => g.Average).ToList();

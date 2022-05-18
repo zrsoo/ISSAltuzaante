@@ -4,6 +4,7 @@ import DisciplineController from '../../controllers/DisciplineController';
 import { useState, useEffect } from 'react';
 import GradeController from '../../controllers/GradeController';
 import UserController from "../../controllers/UserController";
+import {CSVLink} from "react-csv/lib";
 
 export default function GroupGrades() {
     const [grades, setGrades] = useState([]);
@@ -71,6 +72,7 @@ export default function GroupGrades() {
                 {renderTableData()}
                 </tbody>
             </table>
+            <CSVLink data={grades.map(({disciplineId, studentEmail, mark}) => ({disciplineId, studentEmail, mark}))}>Download me</CSVLink>
             <h2>{}</h2>
         </div>
 
