@@ -20,6 +20,7 @@ import ViewDisciplinesPerTeacher from './components/ViewDisciplinesPerTeacher/Vi
 import ViewStudentsPerDiscipline from './components/ViewStudentsPerDiscipline/ViewStudentsPerDiscipline';
 import ViewGrades from './components/ViewGrades/ViewGrades';
 import ViewOptionals from './components/ViewOptionals/ViewOptionals';
+import ViewDisciplineRankings from './components/ViewDisciplineRankings/view-discipline-rankings';
 
 export default function App() {
   const [user, setUser] = React.useState();
@@ -54,6 +55,7 @@ export default function App() {
           <Route exact path="/discipline/:id/students" component={ViewStudentsPerDiscipline} />
           <Route exact path="/grades" component={ViewGrades} />
           <Route exact path="/view-optionals" component={ViewOptionals} />
+          <Route exact path="/view-discipline-rankings" component={ViewDisciplineRankings} />
         </Suspense>
       </div>
   )

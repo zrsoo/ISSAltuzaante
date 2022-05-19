@@ -1,0 +1,6 @@
+.contentWrapper {
+    margin: auto;
+    width: 50%;
+    min-height: 10em;
+    border: 2px solid black;
+}
