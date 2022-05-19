@@ -21,5 +21,5 @@ public class Discipline
     
     public string TeacherEmail { get; set; } = string.Empty;
 
-
+    public float AverageGrade { get; set; } = 0;
 }

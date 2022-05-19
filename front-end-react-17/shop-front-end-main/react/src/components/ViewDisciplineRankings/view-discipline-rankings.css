@@ -1,6 +1,8 @@
 .contentWrapper {
     margin: auto;
-    width: 50%;
-    min-height: 10em;
-    border: 2px solid black;
+    width: 70%;
+}
+
+.optionals-table-wrapper {
+    margin-top: 4em;
 }

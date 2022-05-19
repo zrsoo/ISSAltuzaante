@@ -13,12 +13,14 @@ namespace AcademicInfo.Controllers
     public class DisciplineController : ControllerBase
     {
         private readonly DisciplineService _disciplineService;
+        private readonly GradeService _gradeService;
         private readonly UserManager<AcademicUser> _userManager;
         private readonly IUserService _userService;
 
-        public DisciplineController(DisciplineService disciplineService, UserManager<AcademicUser> userManager, IUserService userService)
+        public DisciplineController(DisciplineService disciplineService, GradeService gradeService, UserManager<AcademicUser> userManager, IUserService userService)
         {
             _disciplineService = disciplineService;
+            _gradeService = gradeService;
             _userManager = userManager;
             _userService = userService;
         }
@@ -139,7 +141,6 @@ namespace AcademicInfo.Controllers
 
             List<Discipline> disciplines = await _disciplineService.GetAll();
             return disciplines.FindAll(d => d.IsOptional == true && d.Year == year);
-            
         }
 
 
@@ -180,6 +181,13 @@ namespace AcademicInfo.Controllers
                 });
 
         }
-        
+
+        [HttpGet]
+        [Route("get-disciplines-ranked-grade-avg")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<List<Discipline>> GetDisciplinesRankedByAvgGrade()
+        {
+            return await this._disciplineService.GetRankedByAvgGrade();
+        }
     }
 }

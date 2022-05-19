@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AcademicInfo.Migrations
 {
-    public partial class grade3 : Migration
+    public partial class DisciplineAvgGrade : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,7 +70,8 @@ namespace AcademicInfo.Migrations
                     NumberOfStudents = table.Column<int>(type: "int", nullable: false),
                     MaxNumberOfStudents = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    TeacherEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TeacherEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AverageGrade = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

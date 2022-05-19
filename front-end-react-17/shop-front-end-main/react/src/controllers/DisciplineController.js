@@ -17,6 +17,21 @@ class DisciplineController {
         }
     }
 
+    async getDisciplinesRankedByAvgGrade(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-disciplines-ranked-grade-avg');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async getStudentsForCurrentDiscipline(id){
         if (this.token != null) {
             try {
