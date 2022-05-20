@@ -26,6 +26,7 @@ export default function Home(props) {
                              <div><Link to="/add-optionals" className='btn btn-primary login-button'>Add Optionals</Link></div>
                              <div><Link to="/view-disciplines-teacher" className='btn btn-primary login-button'>View Teaching Discplines</Link></div>
                              <div><Link to="/view-discipline-rankings" className='btn btn-primary login-button'>View Discipline Rankings</Link></div>
+                             <div><Link to="/view-disciplines-per-teacher-year" className='btn btn-primary login-button'>View Disciplines By Teacher And Year</Link></div>
                         </div>
                     }
                 </div>
