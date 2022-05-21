@@ -122,10 +122,7 @@ namespace AcademicInfo.Controllers
         [Authorize(Roles = "Teacher")]
         public async Task<List<Discipline>> getDisciplinesByTeacher()
         {
-            //using the token, we find current teacher's email bla bla new merge
-            //            //test recover changes
-            //test recover changes
-            //test recover changes
+            //using the token, we find current teacher's email
             String email = User.FindFirst("Email")?.Value;
             if (email == null)
                 return null;
@@ -144,7 +141,6 @@ namespace AcademicInfo.Controllers
             //String email = User.FindFirst("Email")?.Value;
             //if (email == null)
             //    return null;
-            //test recover changes
 
             Discipline discipline = await _disciplineService.GetById(disciplineId);
             List<AcademicUser> users = await _userManager.Users.ToListAsync();
