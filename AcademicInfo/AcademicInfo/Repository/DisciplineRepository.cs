@@ -40,6 +40,11 @@ namespace AcademicInfo.Repository
             return await _dataContext.Set<Discipline>().ToListAsync();
         }
 
+        public async Task<List<Discipline>> GetRankedByAvgGrade()
+        {
+            return await _dataContext.Set<Discipline>().OrderBy(discipline => discipline.AverageGrade).Reverse().ToListAsync();
+        }
+
         public Discipline Insert(Discipline discipline)
         {
             return _dataContext.Set<Discipline>().Add(discipline).Entity;

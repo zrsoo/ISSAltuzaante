@@ -7,10 +7,12 @@ namespace AcademicInfo.Services
     public class DisciplineService : IDisciplineService
     {
         private readonly DisciplineRepository _disciplineRepository;
+        private readonly GradeRepository _gradeRepository;
 
-        public DisciplineService(DisciplineRepository disciplineRepository)
+        public DisciplineService(DisciplineRepository disciplineRepository, GradeRepository gradeRepository)
         {
             _disciplineRepository = disciplineRepository;
+            _gradeRepository = gradeRepository;
         }
 
         public async Task<List<Discipline>> GetAll()
@@ -106,6 +108,38 @@ namespace AcademicInfo.Services
 
             _disciplineRepository.Update(patchDiscipline);
             await _disciplineRepository.SaveChangesAsync();
+        }
+
+        private async Task<int> ComputeDisciplineAvgGrade()
+        {
+            var disciplines = new List<Discipline>();
+
+            disciplines = await _disciplineRepository.GetAll();
+
+            float numberOfGrades;
+            float sumOfGrades;
+
+            foreach(var discipline in disciplines)
+            {
+                var grades = await this._gradeRepository.GetByDisciplineId(discipline.DisciplineId);
+
+                numberOfGrades = grades.Count();
+
+                sumOfGrades = grades.
+                    Select(grade => grade.Mark).
+                    Sum();
+
+                discipline.AverageGrade = sumOfGrades / numberOfGrades;
+                _disciplineRepository.Update(discipline);
+            }
+
+            return await _disciplineRepository.SaveChangesAsync();
+        }
+
+        public async Task<List<Discipline>> GetRankedByAvgGrade()
+        {
+            var result = await ComputeDisciplineAvgGrade();
+            return await _disciplineRepository.GetRankedByAvgGrade();
         }
     }
 }

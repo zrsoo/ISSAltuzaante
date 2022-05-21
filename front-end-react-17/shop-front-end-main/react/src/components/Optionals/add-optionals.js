@@ -12,7 +12,6 @@ export default function AddOptionals(props){
     useEffect(() => {
         DisciplineController.getOptionalDisciplines().then((response) => {
           setOptionals(response);
-        
       }, (error) => {
           console.log("ERROR ", error);
       });

@@ -54,6 +54,11 @@ namespace AcademicInfo.Repository
             return await _dataContext.Set<Grade>().FirstOrDefaultAsync(i => i.GradeId == id);
         }
 
+        public async Task<List<Grade>> GetByDisciplineId(int disciplineId)
+        {
+            return await _dataContext.Set<Grade>().Where(grade => grade.DisciplineId == disciplineId).ToListAsync();
+        }
+
         //public async Task<List<Grade>> GetByYear(int year)
         //{
         //    return await _dataContext.Set<Grade>().Where(i => i.Year == year).ToListAsync();
