@@ -180,6 +180,54 @@ namespace AcademicInfo.Controllers
                 });
 
         }
-        
+
+        [HttpGet]
+        [Route("teacher")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<List<Discipline>> getDisciplinesByTeacher()
+        {
+            //using the token, we find current teacher's email bla bla new merge
+            //            //test recover changes
+            //test recover changes
+            //test recover changes
+            String email = User.FindFirst("Email")?.Value;
+            if (email == null)
+                return null;
+
+            List<Discipline> disciplines = await _disciplineService.GetAll();
+            return disciplines.FindAll(d => d.TeacherEmail == email);
+
+        }
+
+        [HttpGet]
+        [Route("{disciplineId}/students")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<List<UserDTO>> getStudentsForCurrentDiscipline(int disciplineId)
+        {
+            //using the token, we find current teacher's email
+            //String email = User.FindFirst("Email")?.Value;
+            //if (email == null)
+            //    return null;
+            //test recover changes
+
+            Discipline discipline = await _disciplineService.GetById(disciplineId);
+            List<AcademicUser> users = await _userManager.Users.ToListAsync();
+            List<UserDTO> result = new List<UserDTO>();
+            if (users != null)
+            {
+                foreach (var user in users)
+                {
+                    if (user.DisciplineId == discipline.DisciplineId)
+                        result.Add(new UserDTO(user));
+
+                    if (user.Year == discipline.Year.ToString() && user.FacultyId == discipline.FacultyId)
+                        result.Add(new UserDTO(user));
+                }
+            }
+
+            return result;
+
+        }
+
     }
 }

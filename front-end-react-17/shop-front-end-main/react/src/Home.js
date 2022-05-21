@@ -13,7 +13,7 @@ export default function Home(props) {
                 </Helmet>
                 <h1>Hello, {props.user.firstName}. Welcome to academic info!</h1>
                 <div className='home-buttons'>
-                {props.user.isStudent === "Yes" &&
+                {props.user.isStudent === "Yes" &&  
                         <div>
                             <Link to="/view-curriculum" className="btn btn-primary login-button">View Curriculum</Link>
                             <Link to="/grades" className="btn btn-primary login-button">View Grades</Link>
