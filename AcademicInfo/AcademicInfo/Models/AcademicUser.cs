@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 
 namespace AcademicInfo.Models
 {
@@ -14,17 +11,16 @@ namespace AcademicInfo.Models
         public string Password { get; set; } = null!;
         public string? City { get; set; }
         public string? Year { get; set; }
-        
+
         public string? Degree { get; set; }
-        
+
         public bool? IsChiefOfDepartment { get; set; }
-        
+
         public int? FacultyId { get; set; }
-        
+
         public int? SpecializationId { get; set; }
-        
+
         [ForeignKey("Discipline")]
         public int DisciplineId { get; set; } // this is the optional id
-        
     }
 }

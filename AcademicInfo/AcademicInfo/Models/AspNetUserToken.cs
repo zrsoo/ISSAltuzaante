@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace AcademicInfo.Models
+﻿namespace AcademicInfo.Models
 {
     public partial class AspNetUserToken
     {

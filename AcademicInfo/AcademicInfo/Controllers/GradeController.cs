@@ -18,6 +18,7 @@ namespace AcademicInfo.Controllers
             _gradeService = gradeService;
             _userManager = userManager;
         }
+
         [HttpGet]
         public async Task<List<Grade>> getAll()
         {
@@ -34,7 +35,6 @@ namespace AcademicInfo.Controllers
 
                 return Ok(new Response { Success = true, Message = "Inserted grade " + id + " successfully!" });
             }
-
             catch (ArgumentException exc)
             {
                 return BadRequest(new Response
@@ -58,7 +58,6 @@ namespace AcademicInfo.Controllers
 
             List<Grade> grades = await _gradeService.GetAll();
             return grades.FindAll(g => g.StudentEmail == email);
-
         }
     }
 }

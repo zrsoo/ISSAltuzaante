@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using AcademicInfo.Models;
+﻿using AcademicInfo.Models;
 using InternshipBackend.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcademicInfo.Config
 {
@@ -18,6 +15,7 @@ namespace AcademicInfo.Config
             : base(options)
         {
         }
+
         public virtual DbSet<AcademicUser> Students { get; set; } = null!;
         public virtual DbSet<LoginModel> Logins { get; set; } = null!;
         public virtual DbSet<StudentRegisterModel> StudentRegisters { get; set; } = null!;
@@ -28,6 +26,7 @@ namespace AcademicInfo.Config
         public virtual DbSet<Faculty> Faculties { get; set; } = null!;
         public virtual DbSet<Discipline> Disciplines { get; set; } = null!;
         public virtual DbSet<Grade> Grades { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -40,11 +39,6 @@ namespace AcademicInfo.Config
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
-            
-         
         }
-        
-        
     }
 }

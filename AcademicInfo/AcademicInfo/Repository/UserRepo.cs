@@ -15,6 +15,7 @@ namespace AcademicInfo.Repository
             this.dbContext = dbContext;
             this._userManager = _uM;
         }
+
         public Task<AcademicUser> FindById(Guid id)
         {
             var dbUser = dbContext.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
@@ -60,7 +61,6 @@ namespace AcademicInfo.Repository
             AcademicUser dbUser = await dbContext.Users.FirstAsync(user => user.Email == email);
             dbUser.DisciplineId = optionalId;
             await dbContext.SaveChangesAsync();
-            
         }
     }
 }

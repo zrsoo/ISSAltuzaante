@@ -16,6 +16,7 @@ namespace AcademicInfo.Repository
             _dataContext = applicationDbContext;
             _currentUserService = currentUserService;
         }
+
         //needs to be called after every modification on tables
         public int SaveChanges()
         {

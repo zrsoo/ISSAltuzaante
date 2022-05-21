@@ -35,7 +35,6 @@ namespace AcademicInfo.Controllers
 
                 return Ok(new Response { Success = true, Message = "Inserted Discipline " + id + " successfully!" });
             }
-
             catch (ArgumentException exc)
             {
                 return BadRequest(new Response
@@ -46,6 +45,7 @@ namespace AcademicInfo.Controllers
                 });
             }
         }
+
         [HttpGet]
         [Route("get-all-optionals")]
         [Authorize(Roles = "Teacher")]
@@ -61,7 +61,7 @@ namespace AcademicInfo.Controllers
             {
                 return null;
             }
-            
+
             if (user.IsChiefOfDepartment == true)
             {
                 List<Discipline> disciplines = await _disciplineService.GetAll();
@@ -72,6 +72,7 @@ namespace AcademicInfo.Controllers
                 return null;
             }
         }
+
         [HttpPatch]
         [Route("update/{id}")]
         [Authorize(Roles = "Teacher,Student,Admin")]
@@ -92,7 +93,7 @@ namespace AcademicInfo.Controllers
                 });
             }
         }
-      
+
         [HttpGet]
         [Route("view-curriculum")]
         [Authorize(Roles = "Student")]
@@ -143,20 +144,19 @@ namespace AcademicInfo.Controllers
             return disciplines.FindAll(d => d.IsOptional == true && d.Year == year);
         }
 
-
         [HttpPatch]
         [Route("assign-optional")]
         [Authorize(Roles = "Student")]
         public async Task<IActionResult> AssignOptional([FromBody] List<PreferenceDTO> preferences)
         {
-
             var l = preferences.OrderByDescending(e => e.Preference).ToList();
 
             int? optional = -1;
             List<Discipline> disciplines = await _disciplineService.GetAll();
-            for(int i=0; i < l.Count(); i++)
-            {   
-                if(disciplines.FindLast(d => d.MaxNumberOfStudents > d.NumberOfStudents && d.DisciplineId == l[i].OptionalId) != null){
+            for (int i = 0; i < l.Count(); i++)
+            {
+                if (disciplines.FindLast(d => d.MaxNumberOfStudents > d.NumberOfStudents && d.DisciplineId == l[i].OptionalId) != null)
+                {
                     optional = l[i].OptionalId;
                     break;
                 }
@@ -179,7 +179,6 @@ namespace AcademicInfo.Controllers
                     Success = false,
                     Message = "All discipline are not available"
                 });
-
         }
 
         [HttpGet]
@@ -205,7 +204,6 @@ namespace AcademicInfo.Controllers
 
             List<Discipline> disciplines = await _disciplineService.GetAll();
             return disciplines.FindAll(d => d.TeacherEmail == email);
-
         }
 
         [HttpGet]
@@ -235,8 +233,6 @@ namespace AcademicInfo.Controllers
             }
 
             return result;
-
         }
-
     }
 }

@@ -8,6 +8,5 @@ namespace AcademicInfo.Services
         public Task<List<Discipline>> GetAll();
 
         public Task<int> AddDiscipline(DisciplineDTO disciplineDTO);
-        
     }
 }

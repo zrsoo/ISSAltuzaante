@@ -5,8 +5,6 @@ using AcademicInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
-using System.Diagnostics;
 
 namespace AcademicInfo.Controllers
 {
@@ -30,10 +28,8 @@ namespace AcademicInfo.Controllers
         [HttpPatch]
         [Route("updateuser")]
         [Authorize]
-
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserModel user)
         {
-
             var currentUserEmail = _currentUserService.GetUserId();
             user.Email = currentUserEmail;
 
@@ -91,7 +87,6 @@ namespace AcademicInfo.Controllers
                     return Ok(new Response { Success = true, Message = "User password updated successfully!" });
                 }
                 else return StatusCode(StatusCodes.Status500InternalServerError, result);
-                
             }
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!", Errors = new List<string> { "Email doesn't exist!" } }); ;
         }

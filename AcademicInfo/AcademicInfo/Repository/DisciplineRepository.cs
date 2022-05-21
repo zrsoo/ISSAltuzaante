@@ -2,7 +2,6 @@
 using AcademicInfo.Models;
 using AcademicInfo.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace AcademicInfo.Repository
 {
@@ -17,6 +16,7 @@ namespace AcademicInfo.Repository
             _dataContext = applicationDbContext;
             _currentUserService = currentUserService;
         }
+
         //needs to be called after every modification on tables
         public int SaveChanges()
         {
@@ -32,7 +32,7 @@ namespace AcademicInfo.Repository
 
         public IQueryable<Discipline> Get()
         {
-            return  _dataContext.Set<Discipline>();
+            return _dataContext.Set<Discipline>();
         }
 
         public async Task<List<Discipline>> GetAll()

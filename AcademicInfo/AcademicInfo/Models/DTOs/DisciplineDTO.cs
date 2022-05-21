@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace AcademicInfo.Models.DTOs
+﻿namespace AcademicInfo.Models.DTOs
 {
     public class DisciplineDTO
     {

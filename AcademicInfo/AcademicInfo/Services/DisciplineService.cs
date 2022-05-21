@@ -36,9 +36,8 @@ namespace AcademicInfo.Services
                     FacultyId = disciplineDTO.FacultyId,
                     Year = disciplineDTO.Year,
                     TeacherEmail = disciplineDTO.TeacherEmail
-                   
                 };
-                
+
                 var result = _disciplineRepository.Insert(discipline);
                 if (result != null)
                 {
@@ -51,7 +50,6 @@ namespace AcademicInfo.Services
             {
                 throw new ArgumentException("Could not save discipline!");
             }
-
         }
 
         public async Task UpdateDiscipline(Discipline discipline, int id)
@@ -93,13 +91,11 @@ namespace AcademicInfo.Services
 
         public async Task IncreaseOptionalDiscipline(int id)
         {
-            
             var patchDiscipline = await _disciplineRepository.GetByIdAsync(id);
 
             if (patchDiscipline != null)
             {
-                patchDiscipline.NumberOfStudents = patchDiscipline.NumberOfStudents +  1;
-   
+                patchDiscipline.NumberOfStudents = patchDiscipline.NumberOfStudents + 1;
             }
             else
             {
@@ -120,7 +116,7 @@ namespace AcademicInfo.Services
             float numberOfGrades;
             float sumOfGrades;
 
-            foreach(var discipline in disciplines)
+            foreach (var discipline in disciplines)
             {
                 var grades = await this._gradeRepository.GetByDisciplineId(discipline.DisciplineId);
 

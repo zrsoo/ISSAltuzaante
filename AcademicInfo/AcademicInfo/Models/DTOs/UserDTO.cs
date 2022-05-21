@@ -2,11 +2,12 @@
 {
     public class UserDTO
     {
-        public string Email { get; set; }= null;
-        public string FirstName { get; set; }= null;
+        public string Email { get; set; } = null;
+        public string FirstName { get; set; } = null;
         public string LastName { get; set; } = null;
 
         public string IsStudent { get; set; } = null;
+
         public UserDTO(AcademicUser user)
         {
             this.Email = user.Email;

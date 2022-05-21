@@ -1,4 +1,3 @@
-using System.Text;
 using AcademicInfo.Config;
 using AcademicInfo.Models;
 using AcademicInfo.Repository;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -105,8 +105,6 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -129,11 +127,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 //app.MapControllerRoute(
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapControllers();
-
 
 app.Run();
