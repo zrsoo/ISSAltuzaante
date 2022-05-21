@@ -123,6 +123,9 @@ namespace AcademicInfo.Controllers
         public async Task<List<Discipline>> getDisciplinesByTeacher()
         {
             //using the token, we find current teacher's email bla bla new merge
+            //            //test recover changes
+            //test recover changes
+            //test recover changes
             String email = User.FindFirst("Email")?.Value;
             if (email == null)
                 return null;
