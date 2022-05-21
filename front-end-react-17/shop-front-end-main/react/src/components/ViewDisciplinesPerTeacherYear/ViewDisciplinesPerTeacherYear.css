@@ -1,6 +1,25 @@
 .contentWrapper {
     margin: auto;
     width: 70%;
+}
 
-    border: 2px solid black;
+.dropdownContainer {
+    width: 100%;
+    margin: auto;
+
+    padding-bottom: 7em;
+}
+
+.teacherDropdown {
+    float: left;
+}
+
+.yearDropdown {
+    float: right;
+}
+
+.btn {
+    background: #27296d !important;
+    border-color: #27296d !important;
+    box-shadow: unset !important;
 }
