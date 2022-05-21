@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import DisciplineController from '../../controllers/DisciplineController';
-import "../ViewDisciplineRankings/view-discipline-rankings.css";
+import "../ViewDisciplineRankings/ViewDisciplineRankings.css";
 
 export default function ViewDisciplineRankings() {
     const [optionals, setOptionals] = useState([]);

@@ -112,6 +112,7 @@ namespace AcademicInfo.Services
 
         private async Task<int> ComputeDisciplineAvgGrade()
         {
+            // TODO Treat the case when there are no grades for a discipline.
             var disciplines = new List<Discipline>();
 
             disciplines = await _disciplineRepository.GetAll();

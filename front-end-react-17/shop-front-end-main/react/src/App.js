@@ -20,7 +20,7 @@ import ViewDisciplinesPerTeacher from './components/ViewDisciplinesPerTeacher/Vi
 import ViewStudentsPerDiscipline from './components/ViewStudentsPerDiscipline/ViewStudentsPerDiscipline';
 import ViewGrades from './components/ViewGrades/ViewGrades';
 import ViewOptionals from './components/ViewOptionals/ViewOptionals';
-import ViewDisciplineRankings from './components/ViewDisciplineRankings/view-discipline-rankings';
+import ViewDisciplineRankings from './components/ViewDisciplineRankings/ViewDisciplineRankings';
 import ViewDisciplinesPerTeacherYear from './components/ViewDisciplinesPerTeacherYear/ViewDisciplinesPerTeacherYear';
 
 export default function App() {
