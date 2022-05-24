@@ -62,6 +62,21 @@ class DisciplineController {
         }
     }
 
+    async getNumberOfOptionalDisciplines() {
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/number-optionals');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async insertDiscipline(newDiscipline) {
         if (this.token != null) {
             try {

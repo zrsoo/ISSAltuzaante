@@ -207,6 +207,19 @@ namespace AcademicInfo.Controllers
         }
 
         [HttpGet]
+        [Route("number-optionals")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<int> GetOptionalsCount()
+        {
+            String email = User.FindFirst("Email").Value;
+            if (email == null)
+                return -1;
+
+            return (await _disciplineService.GetAll()).FindAll(discipline => discipline.IsOptional == true 
+            && discipline.TeacherEmail == email).Count();
+        }
+
+        [HttpGet]
         [Route("{disciplineId}/students")]
         [Authorize(Roles = "Teacher")]
         public async Task<List<UserDTO>> getStudentsForCurrentDiscipline(int disciplineId)

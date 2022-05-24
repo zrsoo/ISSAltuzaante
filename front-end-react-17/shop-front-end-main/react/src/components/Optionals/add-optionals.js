@@ -8,13 +8,27 @@ export default function AddOptionals(props){
     const [name, setName] = useState();
     const [facultyId, setFacultyId] = useState();
     const [year, setYear] = useState();
+    const [nrDisciplines, setNrDisciplines] = useState();
 
     useEffect(() => {
+        let isMounted = true;
+
         DisciplineController.getOptionalDisciplines().then((response) => {
-          setOptionals(response);
-      }, (error) => {
+          if(isMounted)
+            setOptionals(response);
+        }, (error) => {
           console.log("ERROR ", error);
-      });
+        });
+
+        DisciplineController.getNumberOfOptionalDisciplines().then((response) => {
+            if(isMounted)
+                setNrDisciplines(response);
+            console.log(response);
+        }, (error) => {
+            console.log("ERROR ", error);
+        });
+
+        return () => { isMounted = false };
       } ,[]);
 
     function renderTableData() {
@@ -35,7 +49,7 @@ export default function AddOptionals(props){
         }
     }
 
-    function addOptional() {
+    function addOptional(props) {
         const newDiscipline = {
             name: name,
             isOptional: Boolean(true),
@@ -44,18 +58,13 @@ export default function AddOptionals(props){
             teacherEmail: props.user.email
         }
 
-        console.log("NEW DISC", newDiscipline);
-
        DisciplineController.insertDiscipline(newDiscipline);
-        
-       console.log(DisciplineController.getOptionalDisciplines());
     }
 
     return (
         <div className="optionals-wrapper">
             <div className='optionals-info-wrapper'>
-                <h1>Hello.</h1>
-                <h2>You have added x optionals. You can add y more.</h2>
+                <h2>You have added {nrDisciplines} optional(s). You can add {2 - nrDisciplines} more.</h2>
             </div>
 
             <div className="optionals-form-wrapper">
@@ -68,7 +77,7 @@ export default function AddOptionals(props){
                         <input class="interactionTextInput" type="text" id="txtFacultyId" onChange={e => setFacultyId(e.target.value)}></input>
                         <label class="label" for="txtYear">Year:</label>
                         <input class="interactionTextInput" type="text" id="txtYear" onChange={e => setYear(e.target.value)}></input>
-                        <input class="submitButton" id="updateButton" type="button" value="Add optional" onClick={() => addOptional()}></input>
+                        <input disabled={nrDisciplines == 2} class="submitButton" id="updateButton" type="button" value="Add optional" onClick={() => addOptional(props)}></input>
                     </fieldset>
                 </form>
             </div>
