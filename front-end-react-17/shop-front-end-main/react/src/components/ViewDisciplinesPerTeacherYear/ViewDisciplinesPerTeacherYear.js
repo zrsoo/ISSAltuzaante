@@ -6,20 +6,39 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import Dropdown  from 'react-bootstrap/Dropdown';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import UserController from '../../controllers/UserController';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 export default function ViewDisciplinesPerTeacherYear() {
     const [optionals, setOptionals] = useState([]);
+    const [emails, setEmails] = useState([]);
+    const [selectedYear, setSelectedYear] = useState('');
+    const [selectedEmail, setSelectedEmail] = useState('');
+    const [disciplines, setDisciplines] = useState([]);
+    
+    const history = useHistory();
+    const location = useRouteMatch();
 
     useEffect(() => {
         DisciplineController.getDisciplinesRankedByAvgGrade().then((response) => {
           setOptionals(response);
-      }, (error) => {
+        }, (error) => {
           console.log("ERROR ", error);
-      });
+        });
+
+        UserController.getTeachersEmails().then((response) => {
+          setEmails(response);
+        }, (error) => {
+          console.log("ERROR", error);
+        })
       } ,[]);
 
     function renderTableData() {
+      console.log(disciplines);
+      console.log(optionals);
+
+      if(disciplines == [] || disciplines.length == 0 || disciplines == null)
+      {
         if (optionals != null && optionals != [] && optionals.length > 0) {
             return optionals.map((o, index) => {
                 return (
@@ -36,32 +55,79 @@ export default function ViewDisciplinesPerTeacherYear() {
                 )
             })
         }
+      }
+      else
+      {
+        return disciplines.map((o, index) => {
+          return (
+              <tr key={index}>
+                  <td>{o.name}</td>
+                  <td>{o.isOptional.toString()}</td>
+                  <td>{o.facultyId}</td>
+                  <td>{o.numberOfStudents}</td>
+                  <td>{o.maxNumberOfStudents}</td>
+                  <td>{o.year}</td>
+                  <td>{o.teacherEmail}</td>
+                  <td>{o.averageGrade}</td>
+              </tr>
+          )
+        })
+      }
     }
 
-    //  TODO:    1.) Make a function similar to renderTableData that loads Drowpdown.Items in dropdowns (containing all teacher emails, it's ok to hardcode years)
-    //           2.) For each click on an option, perform GET request (most comfortably with query parameters in link) that gets disciplines for specified teacher and year
-    //           3.) Once a teacher or a year is selected, set the Dropdown.Toggle to display the selected item.
+    const pushSelectedEmailYear = () => {
+        if(selectedEmail != "" && selectedYear != "")
+          DisciplineController.getDisciplinesByTeacherYear(selectedEmail, selectedYear).then((response) => {
+            setDisciplines(response);
+          }, (error) => {
+            console.log("ERROR ", error);
+          });
+    }
+
+    function loadEmails() {
+      if(emails != null && emails != [] && emails.length > 0)
+      {
+        return emails.map((email, index) => {
+          return (
+            <Dropdown.Item eventKey={email.email} key={index} href={'#'}>{email.email}</Dropdown.Item>
+          )
+        })
+      }
+    }
      
+    const handleSelectEmail = (e) => {
+      console.log(e);
+
+      setSelectedEmail(e);
+    }
+
+    const handleSelectYear = (e) => {
+      console.log(e);
+
+      setSelectedYear(e);
+    }
+
     return (
       <div className="contentWrapper">
         <div className="dropdownContainer">
-          <Dropdown className='teacherDropdown'>
+          <p>If your search terms return nothing, the table will go back to printing all disciplines.</p>
+          <Dropdown onSelect={handleSelectEmail} className='teacherDropdown'>
             <Dropdown.Toggle variant="success">Teacher email</Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item href="#">Home Page</Dropdown.Item>
-              <Dropdown.Item href="#">Settings</Dropdown.Item>
-              <Dropdown.Item href="#">Logout</Dropdown.Item>
+            <Dropdown.Menu >
+              {loadEmails()}
             </Dropdown.Menu>
           </Dropdown>
 
-          <Dropdown className='yearDropdown'>
+          <Dropdown onSelect={handleSelectYear} className='yearDropdown'>
             <Dropdown.Toggle variant="success">Year</Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item href="#">Home Page</Dropdown.Item>
-              <Dropdown.Item href="#">Settings</Dropdown.Item>
-              <Dropdown.Item href="#">Logout</Dropdown.Item>
+              <Dropdown.Item eventKey='1' href="#">1</Dropdown.Item>
+              <Dropdown.Item eventKey='2' href="#">2</Dropdown.Item>
+              <Dropdown.Item eventKey='3' href="#">3</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+
+          <button onClick={pushSelectedEmailYear} className='btn-primary btn search-button'>Search</button>
         </div>
         <div className="discipline-table-wrapper">
           <table className="table table-striped">

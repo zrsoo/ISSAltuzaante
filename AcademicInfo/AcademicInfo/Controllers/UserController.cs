@@ -106,5 +106,12 @@ namespace AcademicInfo.Controllers
 
             return StatusCode(200, _currentUserService.GetUserId());
         }
+
+        [HttpGet]
+        [Route("get-teacher-emails")]
+        public async Task<List<UserEmailDTO>> GetTeachersEmails()
+        {
+            return await _userService.GetTeachersEmail();
+        }
     }
 }

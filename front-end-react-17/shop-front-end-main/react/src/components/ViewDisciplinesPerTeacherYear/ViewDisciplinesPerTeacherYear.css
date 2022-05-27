@@ -23,3 +23,7 @@
     border-color: #27296d !important;
     box-shadow: unset !important;
 }
+
+.search-button {
+    margin-left: 12em;
+}

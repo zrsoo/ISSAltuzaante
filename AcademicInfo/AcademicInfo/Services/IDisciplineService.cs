@@ -8,5 +8,7 @@ namespace AcademicInfo.Services
         public Task<List<Discipline>> GetAll();
 
         public Task<int> AddDiscipline(DisciplineDTO disciplineDTO);
+
+        public Task<List<Discipline>> getDisciplinesByTeacherYear(string email, int year);
     }
 }

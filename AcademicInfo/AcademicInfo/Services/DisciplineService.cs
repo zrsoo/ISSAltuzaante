@@ -108,7 +108,6 @@ namespace AcademicInfo.Services
 
         private async Task<int> ComputeDisciplineAvgGrade()
         {
-            // TODO Treat the case when there are no grades for a discipline.
             var disciplines = new List<Discipline>();
 
             disciplines = await _disciplineRepository.GetAll();
@@ -126,7 +125,11 @@ namespace AcademicInfo.Services
                     Select(grade => grade.Mark).
                     Sum();
 
-                discipline.AverageGrade = sumOfGrades / numberOfGrades;
+                if (sumOfGrades > 0)
+                    discipline.AverageGrade = sumOfGrades / numberOfGrades;
+                else
+                    discipline.AverageGrade = 0;
+
                 _disciplineRepository.Update(discipline);
             }
 
@@ -137,6 +140,11 @@ namespace AcademicInfo.Services
         {
             var result = await ComputeDisciplineAvgGrade();
             return await _disciplineRepository.GetRankedByAvgGrade();
+        }
+
+        public async Task<List<Discipline>> getDisciplinesByTeacherYear(string email, int year)
+        {
+            return (await _disciplineRepository.GetByYear(year)).Where(discipline => discipline.TeacherEmail == email).ToList();
         }
     }
 }

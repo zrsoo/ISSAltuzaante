@@ -1,7 +1,9 @@
 ﻿using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 using AcademicInfo.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -97,6 +99,13 @@ namespace AcademicInfo.Services
         public async Task UpdateDisciplineAsync(String email, int optionalId)
         {
             await _userRepo.UpdateDisciplineAsync(email, optionalId);
+        }
+
+        public async Task<List<UserEmailDTO>> GetTeachersEmail()
+        {
+            return await _userManager.Users
+                .Select(user => new UserEmailDTO(user.Email))
+                .ToListAsync();
         }
     }
 }

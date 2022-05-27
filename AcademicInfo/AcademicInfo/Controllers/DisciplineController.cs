@@ -247,5 +247,13 @@ namespace AcademicInfo.Controllers
 
             return result;
         }
+
+        [HttpGet]
+        [Route("get-disciplines-by-teacher-year")]
+        public async Task<List<Discipline>> GetDisciplinesByTeacherYear([FromQuery(Name = "email")] string email, 
+            [FromQuery(Name = "year")] int year)
+        {
+            return await _disciplineService.getDisciplinesByTeacherYear(email, year);
+        }
     }
 }

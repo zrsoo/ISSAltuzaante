@@ -32,6 +32,21 @@ class DisciplineController {
         }
     }
 
+    async getDisciplinesByTeacherYear(email, year){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-disciplines-by-teacher-year' + '?email=' + email + '&year=' + year);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async getStudentsForCurrentDiscipline(id){
         if (this.token != null) {
             try {
