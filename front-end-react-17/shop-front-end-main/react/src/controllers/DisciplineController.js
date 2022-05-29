@@ -176,6 +176,5 @@ class DisciplineController {
             return null;
         }
     }
-
 }
 export default new DisciplineController();

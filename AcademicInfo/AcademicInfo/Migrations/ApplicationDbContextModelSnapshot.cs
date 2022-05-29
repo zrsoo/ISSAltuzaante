@@ -58,6 +58,9 @@ namespace AcademicInfo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAproved")
+                        .HasColumnType("bit");
+
                     b.Property<bool?>("IsChiefOfDepartment")
                         .HasColumnType("bit");
 
@@ -107,6 +110,9 @@ namespace AcademicInfo.Migrations
 
                     b.Property<string>("Year")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isSigned")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

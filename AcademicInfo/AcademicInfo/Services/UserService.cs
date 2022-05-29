@@ -107,5 +107,10 @@ namespace AcademicInfo.Services
                 .Select(user => new UserEmailDTO(user.Email))
                 .ToListAsync();
         }
+
+        public async Task<bool> ApproveOptional(String email)
+        {
+            return await _userRepo.UpdateApproval(email);
+        }
     }
 }

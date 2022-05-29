@@ -240,7 +240,7 @@ namespace AcademicInfo.Controllers
                     if (user.DisciplineId == discipline.DisciplineId)
                         result.Add(new UserDTO(user));
 
-                    if (user.Year == discipline.Year.ToString() && user.FacultyId == discipline.FacultyId)
+                    if (user.Year == discipline.Year.ToString() && user.FacultyId == discipline.FacultyId && discipline.IsOptional == false)
                         result.Add(new UserDTO(user));
                 }
             }
@@ -255,5 +255,7 @@ namespace AcademicInfo.Controllers
         {
             return await _disciplineService.getDisciplinesByTeacherYear(email, year);
         }
+
+
     }
 }

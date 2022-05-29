@@ -22,5 +22,9 @@ namespace AcademicInfo.Models
 
         [ForeignKey("Discipline")]
         public int DisciplineId { get; set; } // this is the optional id
+
+        public bool IsAproved { get; set; } = false;
+
+        public bool isSigned { get; set; } = false;
     }
 }

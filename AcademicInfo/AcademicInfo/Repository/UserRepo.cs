@@ -62,5 +62,14 @@ namespace AcademicInfo.Repository
             dbUser.DisciplineId = optionalId;
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task<bool> UpdateApproval(String email)
+        {
+            AcademicUser dbUser = await dbContext.Users.FirstAsync(user => user.Email == email);
+            dbUser.IsAproved = true;
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

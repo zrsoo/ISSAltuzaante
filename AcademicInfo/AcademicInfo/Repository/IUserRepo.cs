@@ -13,5 +13,7 @@ namespace AcademicInfo.Repository
         Task<bool> UpdatePassword(UpdatePasswordModel foundUser);
 
         Task<AcademicUser> FindById(Guid id);
+
+        Task<bool> UpdateApproval(String email);
     }
 }

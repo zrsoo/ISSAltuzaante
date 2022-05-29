@@ -15,5 +15,7 @@ namespace AcademicInfo.Services
         public Task UpdateDisciplineAsync(String email, int optionalId);
 
         Task<List<UserEmailDTO>> GetTeachersEmail();
+
+        Task<bool> ApproveOptional(String email);
     }
 }

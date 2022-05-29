@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace AcademicInfo.Migrations
 {
-    public partial class DisciplineAvgGrade : Migration
+    public partial class aprovelist112 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,6 +39,8 @@ namespace AcademicInfo.Migrations
                     FacultyId = table.Column<int>(type: "int", nullable: true),
                     SpecializationId = table.Column<int>(type: "int", nullable: true),
                     DisciplineId = table.Column<int>(type: "int", nullable: false),
+                    IsAproved = table.Column<bool>(type: "bit", nullable: false),
+                    isSigned = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

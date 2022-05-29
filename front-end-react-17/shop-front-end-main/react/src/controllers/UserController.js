@@ -58,5 +58,39 @@ class UserController {
             return null;
         }
     }
+
+    async approveOptionals() {
+        console.log("approve din user")
+        if (localStorage.getItem('token') != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+                const response = await axios.get('/User/approve-optionals');
+                console.log("Raspuns", response);
+                alert("Optionals have been approved.");
+            } catch (error) {
+                console.error("error approve", error);
+                alert("Approval failed", error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async SignContract() {
+        if (localStorage.getItem('token') != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+                const response = await axios.get('/User/sign-contract');
+                alert("Sign contract.");
+            } catch (error) {
+                console.error("sign contract", error);
+                alert("Sign contract", error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
 }
 export default new UserController();

@@ -7,6 +7,8 @@
         public string LastName { get; set; } = null;
 
         public string IsStudent { get; set; } = null;
+        public bool IsApproved { get; set; }
+        public bool HasSigned { get; set; }
 
         public UserDTO(AcademicUser user)
         {
@@ -17,6 +19,9 @@
                 this.IsStudent = "No";
             else
                 this.IsStudent = "Yes";
+
+            this.IsApproved = user.IsAproved;
+            this.HasSigned = user.isSigned;
         }
 
         public UserDTO()

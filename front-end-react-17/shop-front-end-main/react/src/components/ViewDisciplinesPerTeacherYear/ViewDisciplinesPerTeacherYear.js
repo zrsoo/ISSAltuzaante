@@ -112,14 +112,14 @@ export default function ViewDisciplinesPerTeacherYear() {
         <div className="dropdownContainer">
           <p>If your search terms return nothing, the table will go back to printing all disciplines.</p>
           <Dropdown onSelect={handleSelectEmail} className='teacherDropdown'>
-            <Dropdown.Toggle variant="success">Teacher email</Dropdown.Toggle>
+            <Dropdown.Toggle variant="warning">Teacher email</Dropdown.Toggle>
             <Dropdown.Menu >
               {loadEmails()}
             </Dropdown.Menu>
           </Dropdown>
 
           <Dropdown onSelect={handleSelectYear} className='yearDropdown'>
-            <Dropdown.Toggle variant="success">Year</Dropdown.Toggle>
+            <Dropdown.Toggle variant="primary">Year</Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item eventKey='1' href="#">1</Dropdown.Item>
               <Dropdown.Item eventKey='2' href="#">2</Dropdown.Item>
