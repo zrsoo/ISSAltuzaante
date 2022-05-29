@@ -65,7 +65,12 @@ export default function ViewOptionals() {
     );
 
     function assignOptional(){
-        DisciplineController.assignOptionalForStudent(preferences);
+        DisciplineController.assignOptionalForStudent(preferences).then((response)=>{
+            DisciplineController.getOptionals().then((response) =>{
+                console.log(response);
+                setOptionals(response);
+            })
+        });
         setPreferences({optionalId:-1, preference:-1});
     };
 }
