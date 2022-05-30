@@ -14483,6 +14483,11 @@
   dependencies:
     "prop-types" "^15.7.2"
 
+"react-csv@^2.2.2":
+  "integrity" "sha512-RG5hOcZKZFigIGE8LxIEV/OgS1vigFQT4EkaHeKgyuCbUAu9Nbd/1RYq++bJcJJ9VOqO/n9TZRADsXNDR4VEpw=="
+  "resolved" "https://registry.npmjs.org/react-csv/-/react-csv-2.2.2.tgz"
+  "version" "2.2.2"
+
 "react-currency-conv@^1.1.0":
   "integrity" "sha512-QZxySipU/Qo5JTADu20Nu7kaAXVG5CtvkoUswm1riJIjhRSmpyKXjdIMeyE2W2XPuk5RekxImom2F1rAJmBk0w=="
   "resolved" "https://registry.npmjs.org/react-currency-conv/-/react-currency-conv-1.1.0.tgz"

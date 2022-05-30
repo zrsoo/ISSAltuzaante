@@ -57,7 +57,8 @@ export default function Home(props) {
                 }
                 {props.user.isStudent === "No" &&
                         <div>
-                             <div><Link to="/aprove-optionals" className="btn btn-primary login-button">Approve-Optionals</Link></div>
+                            {props.user.isChief != false &&
+                             <div><Link to="/aprove-optionals" className="btn btn-primary login-button">Approve-Optionals</Link></div> }
                              <div><Link to="/add-optionals" className='btn btn-primary login-button'>Add Optionals</Link></div>
                              <div><Link to="/view-disciplines-teacher" className='btn btn-primary login-button'>View Teaching Discplines</Link></div>
                              <div><Link to="/view-discipline-rankings" className='btn btn-primary login-button'>View Discipline Rankings</Link></div>

@@ -10,6 +10,8 @@
         public bool IsApproved { get; set; }
         public bool HasSigned { get; set; }
 
+        public bool? IsChief { get; set; }
+
         public UserDTO(AcademicUser user)
         {
             this.Email = user.Email;
@@ -24,6 +26,10 @@
 
             this.IsApproved = user.IsAproved;
             this.HasSigned = user.isSigned;
+            if (user.IsChiefOfDepartment == null)
+                this.IsChief = false;
+            else
+                this.IsChief = (bool)user.IsChiefOfDepartment;
         }
 
         public UserDTO()

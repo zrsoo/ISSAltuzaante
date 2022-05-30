@@ -183,7 +183,6 @@ namespace AcademicInfo.Controllers
 
             return students.FindAll(s=>s.PhoneNumber == "scholarship");
         }
-    }
 
         [Route("get-teacher-emails")]
         public async Task<List<UserEmailDTO>> GetTeachersEmails()

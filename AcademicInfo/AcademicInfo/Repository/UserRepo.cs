@@ -76,20 +76,20 @@ namespace AcademicInfo.Repository
         public async Task grantScholarships(List<GradeDTO> keptGrades)
         {
             //(from p in dbContext.Students
-              //      where keptGrades.FindIndex(f => f.ID == p.Email) >= 0 select p).ToList()
-                //.ForEach(x => x.PhoneNumber = "scholarship");
-                
-                var student_list = dbContext.Students.ToList().Where(s => keptGrades.FindIndex(f => f.ID == s.Email) >= 0).ToList();
-                List<AcademicUser> results = (from p in student_list
-                    select p).ToList();
+            //      where keptGrades.FindIndex(f => f.ID == p.Email) >= 0 select p).ToList()
+            //.ForEach(x => x.PhoneNumber = "scholarship");
 
-                foreach (AcademicUser p in results)
-                {
-                    p.PhoneNumber = "scholarship";
-                }
+            var student_list = dbContext.Students.ToList().Where(s => keptGrades.FindIndex(f => f.ID == s.Email) >= 0).ToList();
+            List<AcademicUser> results = (from p in student_list
+                                          select p).ToList();
 
-                dbContext.SaveChanges();
+            foreach (AcademicUser p in results)
+            {
+                p.PhoneNumber = "scholarship";
+            }
 
+            dbContext.SaveChanges();
+        }
         public async Task UpdateDisciplineAsync(string email, int optionalId)
         {
             AcademicUser dbUser = await dbContext.Users.FirstAsync(user => user.Email == email);

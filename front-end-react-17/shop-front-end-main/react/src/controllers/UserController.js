@@ -49,6 +49,11 @@ class UserController {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
                 const response = await axios.get('/User/group-statistics/' + id);
                 //console.log(response);
+            } catch(error) {
+                console.log(error);
+            }
+        }
+    }
     async getTeachersEmails() {
         if (localStorage.getItem('token') != null) {
             try {
@@ -75,6 +80,9 @@ class UserController {
                 return response.data;
             } catch (error) {
                 console.error(error);
+            }
+        }
+    }
 
     async approveOptionals() {
         console.log("approve din user")
@@ -105,6 +113,9 @@ class UserController {
                 return response.data;
             } catch (error) {
                 console.error(error);
+            }
+        }
+    }
 
     async SignContract() {
         if (localStorage.getItem('token') != null) {
