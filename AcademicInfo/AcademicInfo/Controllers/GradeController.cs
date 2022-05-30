@@ -19,12 +19,14 @@ namespace AcademicInfo.Controllers
             _userManager = userManager;
         }
 
+        //retrieve all the grades
         [HttpGet]
         public async Task<List<Grade>> getAll()
         {
             return await _gradeService.GetAll();
         }
 
+        //insert a new grade if the request body is ok
         [HttpPost]
         [Route("save")]
         public async Task<IActionResult> InsertAsync([FromBody] Grade grade)
@@ -46,6 +48,7 @@ namespace AcademicInfo.Controllers
             }
         }
 
+        //a student can see all the disciplines done by a teacher, searching him by email
         [HttpGet]
         [Route("student")]
         [Authorize(Roles = "Student")]

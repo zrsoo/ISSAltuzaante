@@ -26,6 +26,7 @@ namespace AcademicInfo.Controllers
             _userService = userService;
         }
 
+        //in order to login, check the username, password, if the requested model is fine, and then send a security token if the login is successful
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -53,6 +54,7 @@ namespace AcademicInfo.Controllers
             return Unauthorized();
         }
 
+        //register as a new user with the role of student, aafter checking if it already exists or the requested model is errorless
         [HttpPost]
         [Route("register-student")]
         public async Task<IActionResult> Register([FromBody] StudentRegisterModel model)
@@ -110,6 +112,7 @@ namespace AcademicInfo.Controllers
             return Ok(new Response { Success = true, Message = "User created successfully!" });
         }
 
+        //register as a new user with the role of teacher, aafter checking if it already exists or the requested model is errorless
         [HttpPost]
         [Route("register-teacher")]
         public async Task<IActionResult> Register([FromBody] TeacherRegisterModel model)
@@ -157,7 +160,7 @@ namespace AcademicInfo.Controllers
                         Errors = result.Errors.Select(e => e.Description).ToList()
                     });
 
-            // add User role to Student
+            // add User role to Teacher
             if (!await _roleManager.RoleExistsAsync(UserRoles.Teacher))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Teacher));
 
@@ -166,6 +169,7 @@ namespace AcademicInfo.Controllers
             return Ok(new Response { Success = true, Message = "User created successfully!" });
         }
 
+        //return a dto of the current user if there is one(search it in db by its email)
         [HttpGet]
         [Route("get-authenticated-user")]
         public async Task<ActionResult> getAuthenticatedUserByTokenAsync()

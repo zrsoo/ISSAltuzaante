@@ -25,6 +25,7 @@ namespace AcademicInfo.Controllers
             _dbContext = dbContext;
         }
 
+        //update a user's first name and last name if the recieved request is valid
         [HttpPatch]
         [Route("updateuser")]
         [Authorize]
@@ -62,6 +63,7 @@ namespace AcademicInfo.Controllers
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!" });
         }
 
+        //update a user's password after checking if it is a valid one (meets some criterias for security)
         [HttpPatch]
         [Route("update-password")]
         [Authorize]
@@ -91,6 +93,7 @@ namespace AcademicInfo.Controllers
             else return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error updating user!", Errors = new List<string> { "Email doesn't exist!" } }); ;
         }
 
+        //get the current authenticated user
         [HttpGet]
         [Route("get-authenticated-user")]
         public async Task<ActionResult> getAuthenticatedUserByTokenAsync()
@@ -107,6 +110,7 @@ namespace AcademicInfo.Controllers
             return StatusCode(200, _currentUserService.GetUserId());
         }
 
+        //get the emails of all the teachers
         [HttpGet]
         [Route("get-teacher-emails")]
         public async Task<List<UserEmailDTO>> GetTeachersEmails()

@@ -1,10 +1,13 @@
 ﻿using AcademicInfo.Config;
 using Microsoft.AspNetCore.Mvc;
 
+
+//interface for logging in
 namespace AcademicInfo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

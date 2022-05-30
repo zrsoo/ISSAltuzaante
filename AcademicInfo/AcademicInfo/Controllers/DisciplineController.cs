@@ -24,7 +24,8 @@ namespace AcademicInfo.Controllers
             _userManager = userManager;
             _userService = userService;
         }
-
+        
+        //add a new discipline if the request is successful
         [HttpPost]
         [Route("save")]
         public async Task<IActionResult> InsertAsync([FromBody] DisciplineDTO disciplineDTO)
@@ -46,12 +47,13 @@ namespace AcademicInfo.Controllers
             }
         }
 
+        //retrieve all the optionals for the teacher with the role of chief of department
         [HttpGet]
         [Route("get-all-optionals")]
         [Authorize(Roles = "Teacher")]
         public async Task<List<Discipline>> getAllOptionals()
         {
-            //using the token, we check if the logged in user is chiefOfDepartment
+            //using the token, we check if the logged in user is teacher, then if it is chiefOfDepartment
             String email = User.FindFirst("Email")?.Value;
             if (email == null)
                 return null;
@@ -73,6 +75,7 @@ namespace AcademicInfo.Controllers
             }
         }
 
+        //update a discipline if the request is successful
         [HttpPatch]
         [Route("update/{id}")]
         [Authorize(Roles = "Teacher,Student,Admin")]
@@ -94,12 +97,12 @@ namespace AcademicInfo.Controllers
             }
         }
 
+        //get all the discipline for a student of a certain year if there is a logged student
         [HttpGet]
         [Route("view-curriculum")]
         [Authorize(Roles = "Student")]
         public async Task<List<Discipline>> GetDisciplinesByYear()
         {
-            //using the token, we check if the logged in user is chiefOfDepartment
             String email = User.FindFirst("Email")?.Value;
             if (email == null)
                 return null;
@@ -122,6 +125,7 @@ namespace AcademicInfo.Controllers
             }
         }
 
+        //view all the optional courses for the current student of a certain year if there is a logged one
         [HttpGet]
         [Route("view-optionals")]
         [Authorize(Roles = "Student")]
@@ -144,6 +148,7 @@ namespace AcademicInfo.Controllers
             return disciplines.FindAll(d => d.IsOptional == true && d.Year == year);
         }
 
+        //assign optionals to students by their preferences in descending order (beginning with the most wanted)
         [HttpPatch]
         [Route("assign-optional")]
         [Authorize(Roles = "Student")]
@@ -181,6 +186,7 @@ namespace AcademicInfo.Controllers
                 });
         }
 
+        //get the disciplines ordered descending by their average grade
         [HttpGet]
         [Route("get-disciplines-ranked-grade-avg")]
         [Authorize(Roles = "Teacher")]
@@ -189,6 +195,7 @@ namespace AcademicInfo.Controllers
             return await this._disciplineService.GetRankedByAvgGrade();
         }
 
+        //get the disciplines for the current logged teacher if there is one
         [HttpGet]
         [Route("teacher")]
         [Authorize(Roles = "Teacher")]
@@ -206,6 +213,7 @@ namespace AcademicInfo.Controllers
             return disciplines.FindAll(d => d.TeacherEmail == email);
         }
 
+        //get the count of optionals done by the current logged teacher if there is one
         [HttpGet]
         [Route("number-optionals")]
         [Authorize(Roles = "Teacher")]
@@ -219,6 +227,7 @@ namespace AcademicInfo.Controllers
             && discipline.TeacherEmail == email).Count();
         }
 
+        //the curent logged teacher can access a list with all the students enrolled to a certain discipline
         [HttpGet]
         [Route("{disciplineId}/students")]
         [Authorize(Roles = "Teacher")]
@@ -248,6 +257,7 @@ namespace AcademicInfo.Controllers
             return result;
         }
 
+        //get the disciplines done by a teacher only in an universitary year
         [HttpGet]
         [Route("get-disciplines-by-teacher-year")]
         public async Task<List<Discipline>> GetDisciplinesByTeacherYear([FromQuery(Name = "email")] string email, 
