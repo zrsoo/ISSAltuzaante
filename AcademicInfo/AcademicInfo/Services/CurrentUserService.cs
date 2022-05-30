@@ -1,7 +1,4 @@
-﻿using AcademicInfo.Models;
-using System.IdentityModel.Tokens.Jwt;
-
-namespace AcademicInfo.Services
+﻿namespace AcademicInfo.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
@@ -16,5 +13,5 @@ namespace AcademicInfo.Services
         {
             return _contextAccessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == "Email")?.Value;
         }
-    }   
+    }
 }

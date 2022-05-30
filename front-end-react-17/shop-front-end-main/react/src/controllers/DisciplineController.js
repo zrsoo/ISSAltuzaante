@@ -17,6 +17,51 @@ class DisciplineController {
         }
     }
 
+    async getOptional(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-optionals');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async getDisciplinesRankedByAvgGrade(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-disciplines-ranked-grade-avg');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async getDisciplinesByTeacherYear(email, year){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-disciplines-by-teacher-year' + '?email=' + email + '&year=' + year);
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async getStudentsForCurrentDiscipline(id){
         if (this.token != null) {
             try {
@@ -37,6 +82,21 @@ class DisciplineController {
             try {
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
                 const response = await axios.get('/discipline/teacher');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async getNumberOfOptionalDisciplines() {
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/number-optionals');
                 return response.data;
             } catch (error) {
                 console.error(error);
@@ -92,6 +152,39 @@ class DisciplineController {
                 return response.data;
             } catch (error) {
                 console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async getOptionals(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/view-optionals');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
+    async assignOptionalForStudent(preferences) {
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                console.log(preferences);
+                const response = await axios.patch('/discipline/assign-optional/', preferences);
+
+                alert("Assigned successfully!");
+            } catch (error) {
+                console.error("eroare-assign", error);
+                alert("Assign failed", error);
             }
         }
         else {

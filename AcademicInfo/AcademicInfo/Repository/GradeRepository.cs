@@ -16,6 +16,7 @@ namespace AcademicInfo.Repository
             _dataContext = applicationDbContext;
             _currentUserService = currentUserService;
         }
+
         //needs to be called after every modification on tables
         public int SaveChanges()
         {
@@ -52,6 +53,11 @@ namespace AcademicInfo.Repository
         public async Task<Grade> GetByIdAsync(int id)
         {
             return await _dataContext.Set<Grade>().FirstOrDefaultAsync(i => i.GradeId == id);
+        }
+
+        public async Task<List<Grade>> GetByDisciplineId(int disciplineId)
+        {
+            return await _dataContext.Set<Grade>().Where(grade => grade.DisciplineId == disciplineId).ToListAsync();
         }
 
         //public async Task<List<Grade>> GetByYear(int year)

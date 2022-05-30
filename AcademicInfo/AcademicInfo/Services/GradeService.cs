@@ -37,6 +37,5 @@ namespace AcademicInfo.Services
         {
             throw new NotImplementedException();
         }
-
     }
 }

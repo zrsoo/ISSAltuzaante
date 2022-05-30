@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AcademicInfo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220515130917_grade3")]
-    partial class grade3
+    [Migration("20220529174246_aprove list112")]
+    partial class aprovelist112
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -59,6 +59,9 @@ namespace AcademicInfo.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAproved")
+                        .HasColumnType("bit");
 
                     b.Property<bool?>("IsChiefOfDepartment")
                         .HasColumnType("bit");
@@ -110,6 +113,9 @@ namespace AcademicInfo.Migrations
                     b.Property<string>("Year")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isSigned")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -130,6 +136,9 @@ namespace AcademicInfo.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DisciplineId"), 1L, 1);
+
+                    b.Property<float>("AverageGrade")
+                        .HasColumnType("real");
 
                     b.Property<int?>("FacultyId")
                         .IsRequired()

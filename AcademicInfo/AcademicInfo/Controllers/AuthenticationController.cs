@@ -1,11 +1,10 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using AcademicInfo.Models;
+﻿using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
+using AcademicInfo.Services;
 using InternshipBackend.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using AcademicInfo.Services;
-using AcademicInfo.Models.DTOs;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace AcademicInfo.Controllers
 {
@@ -17,7 +16,7 @@ namespace AcademicInfo.Controllers
         private readonly UserManager<AcademicUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserService _userService;
-        
+
         [ActivatorUtilitiesConstructor]
         public AuthenticateController(IUserService userService, IConfiguration configuration, UserManager<AcademicUser> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -26,7 +25,7 @@ namespace AcademicInfo.Controllers
             _roleManager = roleManager;
             _userService = userService;
         }
-        
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -34,11 +33,10 @@ namespace AcademicInfo.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = from state in ModelState.Values
-                    from error in state.Errors
-                    select error.ErrorMessage;
+                             from error in state.Errors
+                             select error.ErrorMessage;
 
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Success = false, Message = "Error logging in!", Errors = errors.ToList() });
-
             }
 
             var user = await _userManager.FindByNameAsync(model.Email);
@@ -54,7 +52,7 @@ namespace AcademicInfo.Controllers
             }
             return Unauthorized();
         }
-        
+
         [HttpPost]
         [Route("register-student")]
         public async Task<IActionResult> Register([FromBody] StudentRegisterModel model)
@@ -62,12 +60,11 @@ namespace AcademicInfo.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = from state in ModelState.Values
-                    from error in state.Errors
-                    select error.ErrorMessage;
+                             from error in state.Errors
+                             select error.ErrorMessage;
 
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response {Success = false, Message = "Error creating student!", Errors = errors.ToList()});
-                
+                    new Response { Success = false, Message = "Error creating student!", Errors = errors.ToList() });
             }
 
             var userExists = await _userManager.FindByNameAsync(model.Email);
@@ -75,8 +72,9 @@ namespace AcademicInfo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response
                     {
-                        Success = false, Message = "Error creating student!",
-                        Errors = new List<string> {"Student already exists!"}
+                        Success = false,
+                        Message = "Error creating student!",
+                        Errors = new List<string> { "Student already exists!" }
                     });
 
             AcademicUser student = new()
@@ -98,7 +96,8 @@ namespace AcademicInfo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response
                     {
-                        Success = false, Message = "Error creating user!",
+                        Success = false,
+                        Message = "Error creating user!",
                         Errors = result.Errors.Select(e => e.Description).ToList()
                     });
 
@@ -108,10 +107,9 @@ namespace AcademicInfo.Controllers
 
             await _userManager.AddToRoleAsync(student, UserRoles.Student);
 
-
-            return Ok(new Response {Success = true, Message = "User created successfully!"});
+            return Ok(new Response { Success = true, Message = "User created successfully!" });
         }
-        
+
         [HttpPost]
         [Route("register-teacher")]
         public async Task<IActionResult> Register([FromBody] TeacherRegisterModel model)
@@ -119,12 +117,11 @@ namespace AcademicInfo.Controllers
             if (!ModelState.IsValid)
             {
                 var errors = from state in ModelState.Values
-                    from error in state.Errors
-                    select error.ErrorMessage;
+                             from error in state.Errors
+                             select error.ErrorMessage;
 
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response {Success = false, Message = "Error creating teacher!", Errors = errors.ToList()});
-
+                    new Response { Success = false, Message = "Error creating teacher!", Errors = errors.ToList() });
             }
 
             var userExists = await _userManager.FindByNameAsync(model.Email);
@@ -132,8 +129,9 @@ namespace AcademicInfo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response
                     {
-                        Success = false, Message = "Error creating teacher!",
-                        Errors = new List<string> {"Teacher already exists!"}
+                        Success = false,
+                        Message = "Error creating teacher!",
+                        Errors = new List<string> { "Teacher already exists!" }
                     });
 
             AcademicUser teacher = new()
@@ -147,7 +145,6 @@ namespace AcademicInfo.Controllers
                 Degree = model.Degree,
                 IsChiefOfDepartment = model.IsChiefOfDepartment,
                 FacultyId = model.FacultyId
-                
             };
 
             var result = await _userManager.CreateAsync(teacher, model.Password);
@@ -155,7 +152,8 @@ namespace AcademicInfo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     new Response
                     {
-                        Success = false, Message = "Error creating user!",
+                        Success = false,
+                        Message = "Error creating user!",
                         Errors = result.Errors.Select(e => e.Description).ToList()
                     });
 
@@ -165,8 +163,7 @@ namespace AcademicInfo.Controllers
 
             await _userManager.AddToRoleAsync(teacher, UserRoles.Teacher);
 
-
-            return Ok(new Response {Success = true, Message = "User created successfully!"});
+            return Ok(new Response { Success = true, Message = "User created successfully!" });
         }
 
         [HttpGet]
@@ -186,4 +183,3 @@ namespace AcademicInfo.Controllers
         }
     }
 }
-

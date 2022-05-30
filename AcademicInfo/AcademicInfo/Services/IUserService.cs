@@ -1,14 +1,17 @@
-﻿
+﻿using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using AcademicInfo.Models;
 using AcademicInfo.Models.DTOs;
+
 
 namespace AcademicInfo.Services
 {
     public interface IUserService
     {
         Task UpdateAsync(UpdateUserModel foundUser);
+
         Task<Response> UpdatePasswordAsync(UpdatePasswordModel user);
 
         public Task<JwtSecurityToken> GenerateJwt(AcademicUser user);
@@ -19,5 +22,12 @@ namespace AcademicInfo.Services
 
 
         Task grantScholarships(List<GradeDTO> keptGrades);
+
+        public Task UpdateDisciplineAsync(String email, int optionalId);
+
+        Task<List<UserEmailDTO>> GetTeachersEmail();
+
+        Task<bool> ApproveOptional(String email);
+
     }
 }

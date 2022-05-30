@@ -5,8 +5,7 @@ using AcademicInfo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcademicInfo.Controllers
 {
@@ -31,10 +30,8 @@ namespace AcademicInfo.Controllers
         [HttpPatch]
         [Route("updateuser")]
         [Authorize]
-
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserModel user)
         {
-
             var currentUserEmail = _currentUserService.GetUserId();
             user.Email = currentUserEmail;
 
@@ -188,5 +185,41 @@ namespace AcademicInfo.Controllers
         }
     }
 
+        [Route("get-teacher-emails")]
+        public async Task<List<UserEmailDTO>> GetTeachersEmails()
+        {
+            return await _userService.GetTeachersEmail();
+        }
 
+        [HttpGet]
+        [Route("approve-optionals")]
+        public async Task<String> ApproveOptionals()
+        {
+            List<AcademicUser> users = await _userManager.Users.ToListAsync();
+            foreach (var user in users)
+            {
+                AcademicUser dbUser = await _dbContext.Users.FirstAsync(duser => duser.Email == user.Email);
+                dbUser.IsAproved = true;
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return "Success!";
+        }
+
+        [HttpGet]
+        [Route("sign-contract")]
+        public async Task<String> SignContract()
+        {
+            String email = User.FindFirst("Email")?.Value;
+            if (email == null) 
+                return null;
+
+
+            AcademicUser dbUser = await _dbContext.Users.FirstAsync(duser => duser.Email == email);
+            dbUser.isSigned = true;
+            await _dbContext.SaveChangesAsync();
+
+            return "Success!";
+        }
+    }
 }

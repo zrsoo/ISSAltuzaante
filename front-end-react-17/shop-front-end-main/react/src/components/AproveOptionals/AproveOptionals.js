@@ -2,6 +2,7 @@ import React from 'react'
 import "../AproveOptionals/AproveOptionals.css";
 import DisciplineController from '../../controllers/DisciplineController';
 import { useState, useEffect } from 'react';
+import UserController from '../../controllers/UserController';
 
 export default function AproveOptionals() {
     const [optionals, setOptionals] = useState([]);
@@ -52,6 +53,10 @@ export default function AproveOptionals() {
         
     }
 
+    function approveOptionals() {
+        UserController.approveOptionals();
+    }
+
     return (
         <div className='optionals'>
             <table className='table table-striped'>
@@ -69,7 +74,7 @@ export default function AproveOptionals() {
                     {renderTableData()}
                 </tbody>
             </table>
-          <h2>{}</h2>
+            <td><button className='btn btn-success' onClick={() => approveOptionals()}>Approve Optionals</button></td>
         </div>
 
     );

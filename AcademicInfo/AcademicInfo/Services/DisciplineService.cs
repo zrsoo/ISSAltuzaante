@@ -7,10 +7,12 @@ namespace AcademicInfo.Services
     public class DisciplineService : IDisciplineService
     {
         private readonly DisciplineRepository _disciplineRepository;
+        private readonly GradeRepository _gradeRepository;
 
-        public DisciplineService(DisciplineRepository disciplineRepository)
+        public DisciplineService(DisciplineRepository disciplineRepository, GradeRepository gradeRepository)
         {
             _disciplineRepository = disciplineRepository;
+            _gradeRepository = gradeRepository;
         }
 
         public async Task<List<Discipline>> GetAll()
@@ -34,9 +36,8 @@ namespace AcademicInfo.Services
                     FacultyId = disciplineDTO.FacultyId,
                     Year = disciplineDTO.Year,
                     TeacherEmail = disciplineDTO.TeacherEmail
-                   
                 };
-                
+
                 var result = _disciplineRepository.Insert(discipline);
                 if (result != null)
                 {
@@ -49,7 +50,6 @@ namespace AcademicInfo.Services
             {
                 throw new ArgumentException("Could not save discipline!");
             }
-
         }
 
         public async Task UpdateDiscipline(Discipline discipline, int id)
@@ -87,6 +87,64 @@ namespace AcademicInfo.Services
         public async Task<Discipline> GetById(int id)
         {
             return await _disciplineRepository.GetByIdAsync(id);
+        }
+
+        public async Task IncreaseOptionalDiscipline(int id)
+        {
+            var patchDiscipline = await _disciplineRepository.GetByIdAsync(id);
+
+            if (patchDiscipline != null)
+            {
+                patchDiscipline.NumberOfStudents = patchDiscipline.NumberOfStudents + 1;
+            }
+            else
+            {
+                throw new ArgumentNullException("Discipline is null");
+            }
+
+            _disciplineRepository.Update(patchDiscipline);
+            await _disciplineRepository.SaveChangesAsync();
+        }
+
+        private async Task<int> ComputeDisciplineAvgGrade()
+        {
+            var disciplines = new List<Discipline>();
+
+            disciplines = await _disciplineRepository.GetAll();
+
+            float numberOfGrades;
+            float sumOfGrades;
+
+            foreach (var discipline in disciplines)
+            {
+                var grades = await this._gradeRepository.GetByDisciplineId(discipline.DisciplineId);
+
+                numberOfGrades = grades.Count();
+
+                sumOfGrades = grades.
+                    Select(grade => grade.Mark).
+                    Sum();
+
+                if (sumOfGrades > 0)
+                    discipline.AverageGrade = sumOfGrades / numberOfGrades;
+                else
+                    discipline.AverageGrade = 0;
+
+                _disciplineRepository.Update(discipline);
+            }
+
+            return await _disciplineRepository.SaveChangesAsync();
+        }
+
+        public async Task<List<Discipline>> GetRankedByAvgGrade()
+        {
+            var result = await ComputeDisciplineAvgGrade();
+            return await _disciplineRepository.GetRankedByAvgGrade();
+        }
+
+        public async Task<List<Discipline>> getDisciplinesByTeacherYear(string email, int year)
+        {
+            return (await _disciplineRepository.GetByYear(year)).Where(discipline => discipline.TeacherEmail == email).ToList();
         }
     }
 }

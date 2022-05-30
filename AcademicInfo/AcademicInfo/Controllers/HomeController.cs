@@ -1,7 +1,5 @@
 ﻿using AcademicInfo.Config;
-using AcademicInfo.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace AcademicInfo.Controllers
 {
@@ -11,11 +9,13 @@ namespace AcademicInfo.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext context;
+
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
             this.context = context;
         }
+
         [HttpGet]
         public IActionResult Index()
         {

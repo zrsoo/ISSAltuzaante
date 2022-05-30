@@ -22,6 +22,7 @@ export default function ViewCurriculum() {
         return disciplines.map((o, index) => { 
             return (
                 <tr key={index}>
+                    <td>{o.disciplineId}</td>
                     <td>{o.name}</td>
                     <td>{o.isOptional}</td>
                     <td>{o.facultyId}</td>
@@ -39,6 +40,7 @@ export default function ViewCurriculum() {
             <table className='table table-striped'>
                 <thead>
                     <tr>
+                        <th>Discipline Id</th>
                         <th>Name</th>
                         <th>IsOptional</th>
                         <th>FacultyId</th>

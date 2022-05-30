@@ -22,6 +22,10 @@ import ViewGrades from './components/ViewGrades/ViewGrades';
 import GroupGrades from './components/GroupGrades/GroupGrades';
 import YearGrades from "./components/YearGrades/YearGrades";
 import GrantScholarships from "./components/ViewScholarships/ViewScholarships";
+import ViewOptionals from './components/ViewOptionals/ViewOptionals';
+import ViewDisciplineRankings from './components/ViewDisciplineRankings/ViewDisciplineRankings';
+import ViewDisciplinesPerTeacherYear from './components/ViewDisciplinesPerTeacherYear/ViewDisciplinesPerTeacherYear';
+
 export default function App() {
   const [user, setUser] = React.useState();
   
@@ -51,12 +55,15 @@ export default function App() {
           <Route exact path="/add-optionals" component={() => <AddOptionals user={user}/>} />
           <Route exact path="/aprove-optionals" component={AproveOptionals} />
           <Route exact path="/view-curriculum" component={ViewCurriculum} />
-          <Route exact path="/view-disciplines-teacher" component={ViewDisciplinesPerTeacher} />`
+          <Route exact path="/view-disciplines-teacher" component={ViewDisciplinesPerTeacher} />
           <Route exact path="/discipline/:id/students" component={ViewStudentsPerDiscipline} />
           <Route exact path="/grades" component={ViewGrades} />
           <Route exact path="/groupGrades" component={GroupGrades} />
           <Route exact path="/yearGrades" component={YearGrades} />
           <Route exact path="/grantScholarships" component={GrantScholarships} />
+          <Route exact path="/view-optionals" component={ViewOptionals} />
+          <Route exact path="/view-discipline-rankings" component={ViewDisciplineRankings} />
+          <Route exact path="/view-disciplines-per-teacher-year" component={ViewDisciplinesPerTeacherYear} />
         </Suspense>
       </div>
   )

@@ -1,8 +1,9 @@
-﻿
+﻿using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
+using AcademicInfo.Repository;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Text.RegularExpressions;
 using AcademicInfo.Models;
 using AcademicInfo.Models.DTOs;
 using AcademicInfo.Repository;
+
 
 namespace AcademicInfo.Services
 {
@@ -19,7 +21,6 @@ namespace AcademicInfo.Services
         private readonly UserManager<AcademicUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly ICurrentUserService _currentUserService;
-
 
         public UserService(UserManager<AcademicUser> userManager, IConfiguration configuration, IUserRepo userRepo, ICurrentUserService currentUserService)
         {
@@ -43,7 +44,6 @@ namespace AcademicInfo.Services
             //{
             //    await _userRepo.UpdatePasswordAsync(user);
             //}
-
         }
 
         public async Task<Response> UpdatePasswordAsync(UpdatePasswordModel user)
@@ -54,7 +54,6 @@ namespace AcademicInfo.Services
             var hasSpecialCharacter = new Regex(@"[!@#$%^&*]+");
 
             var isValidated = hasNumber.IsMatch(user.NewPassword) && hasUpperChar.IsMatch(user.NewPassword) && hasMinimum8Chars.IsMatch(user.NewPassword) && hasSpecialCharacter.IsMatch(user.NewPassword);
-
 
             if (isValidated)
             {
@@ -69,7 +68,6 @@ namespace AcademicInfo.Services
                 }
             }
             return new Response(false, "New password should contain at least one number, capital letter and should be at least 8 characters long.");
-
         }
 
         public async Task<JwtSecurityToken> GenerateJwt(AcademicUser user)
@@ -117,5 +115,22 @@ namespace AcademicInfo.Services
             await _userRepo.grantScholarships(keptGrades);
         }
         
+        public async Task UpdateDisciplineAsync(String email, int optionalId)
+        {
+            await _userRepo.UpdateDisciplineAsync(email, optionalId);
+        }
+
+        public async Task<List<UserEmailDTO>> GetTeachersEmail()
+        {
+            return await _userManager.Users
+                .Where(user => user.Degree != null)
+                .Select(user => new UserEmailDTO(user.Email))
+                .ToListAsync();
+        }
+
+        public async Task<bool> ApproveOptional(String email)
+        {
+            return await _userRepo.UpdateApproval(email);
+        }
     }
 }

@@ -1,4 +1,7 @@
 import React from 'react';
+import "bootstrap/dist/js/bootstrap.min.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Popper from 'popper.js';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
