@@ -17,10 +17,12 @@ export default function GroupGrades() {
         };
         UserController.getStatistics(data.specializationId).then((response) => {
             setGrades(response);
+            console.log("grades2",response);
     })
     }
 
     useEffect(() => {
+        console.log("GRADES", grades);
         renderTableData();
     }, [grades])
 
@@ -72,7 +74,10 @@ export default function GroupGrades() {
                 {renderTableData()}
                 </tbody>
             </table>
-            <CSVLink data={grades.map(({disciplineId, studentEmail, mark}) => ({disciplineId, studentEmail, mark}))}>Download me</CSVLink>
+            {
+                grades != undefined && <div><CSVLink data={grades.map(({disciplineId, studentEmail, mark}) => ({disciplineId, studentEmail, mark}))}>Download me</CSVLink></div>
+            }
+            
             <h2>{}</h2>
         </div>
 
