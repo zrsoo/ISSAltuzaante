@@ -13,9 +13,10 @@ export default function AddOptionals(props){
     useEffect(() => {
         let isMounted = true;
 
-        DisciplineController.getOptionalDisciplines().then((response) => {
+        DisciplineController.getOptional().then((response) => {
           if(isMounted)
             setOptionals(response);
+            console.log(response);
         }, (error) => {
           console.log("ERROR ", error);
         });

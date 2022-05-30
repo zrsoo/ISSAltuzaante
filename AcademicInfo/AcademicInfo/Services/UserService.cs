@@ -104,6 +104,7 @@ namespace AcademicInfo.Services
         public async Task<List<UserEmailDTO>> GetTeachersEmail()
         {
             return await _userManager.Users
+                .Where(user => user.Degree != null)
                 .Select(user => new UserEmailDTO(user.Email))
                 .ToListAsync();
         }

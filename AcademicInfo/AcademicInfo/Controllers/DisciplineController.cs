@@ -256,6 +256,24 @@ namespace AcademicInfo.Controllers
             return await _disciplineService.getDisciplinesByTeacherYear(email, year);
         }
 
+        [HttpGet]
+        [Route("get-optionals")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<List<Discipline>> getOptionals()
+        {
+            //using the token, we check if the logged in user is chiefOfDepartment
+            String email = User.FindFirst("Email")?.Value;
+            if (email == null)
+                return null;
 
+            AcademicUser user = await _userManager.FindByNameAsync(email);
+            if (user == null)
+            {
+                return null;
+            }
+    
+            List<Discipline> disciplines = await _disciplineService.GetAll();
+            return disciplines.FindAll(d => d.IsOptional == true);
+        }
     }
 }

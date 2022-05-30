@@ -17,6 +17,21 @@ class DisciplineController {
         }
     }
 
+    async getOptional(){
+        if (this.token != null) {
+            try {
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.token;
+                const response = await axios.get('/discipline/get-optionals');
+                return response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else {
+            return null;
+        }
+    }
+
     async getDisciplinesRankedByAvgGrade(){
         if (this.token != null) {
             try {
