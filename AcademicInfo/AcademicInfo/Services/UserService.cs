@@ -8,6 +8,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
+using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
+using AcademicInfo.Repository;
+
 
 namespace AcademicInfo.Services
 {
@@ -95,7 +99,22 @@ namespace AcademicInfo.Services
 
             return token;
         }
+        
+        public async Task<List<AcademicUser>> GetAllStudents()
+        {
+            return await _userRepo.GetAll();
+        }
+        
+        public async Task<List<Grade>> GetAllGrades()
+        {
+            return await _userRepo.GetAllGrades();
+        }
 
+        public async Task grantScholarships(List<GradeDTO> keptGrades)
+        {
+            await _userRepo.grantScholarships(keptGrades);
+        }
+        
         public async Task UpdateDisciplineAsync(String email, int optionalId)
         {
             await _userRepo.UpdateDisciplineAsync(email, optionalId);

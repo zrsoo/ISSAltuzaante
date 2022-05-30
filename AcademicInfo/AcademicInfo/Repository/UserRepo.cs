@@ -1,5 +1,7 @@
 ﻿using AcademicInfo.Config;
 using AcademicInfo.Models;
+using AcademicInfo.Models.DTOs;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -55,6 +57,38 @@ namespace AcademicInfo.Repository
             }
             return false;
         }
+        
+        public async Task<List<AcademicUser>> GetAllStudents()
+        {
+            return dbContext.Students.ToList();
+        }
+        
+        public async Task<List<AcademicUser>> GetAll()
+        {
+            return await dbContext.Set<AcademicUser>().ToListAsync();
+        }
+        
+        public async Task<List<Grade>> GetAllGrades()
+        {
+            return await dbContext.Set<Grade>().ToListAsync();
+        }
+
+        public async Task grantScholarships(List<GradeDTO> keptGrades)
+        {
+            //(from p in dbContext.Students
+              //      where keptGrades.FindIndex(f => f.ID == p.Email) >= 0 select p).ToList()
+                //.ForEach(x => x.PhoneNumber = "scholarship");
+                
+                var student_list = dbContext.Students.ToList().Where(s => keptGrades.FindIndex(f => f.ID == s.Email) >= 0).ToList();
+                List<AcademicUser> results = (from p in student_list
+                    select p).ToList();
+
+                foreach (AcademicUser p in results)
+                {
+                    p.PhoneNumber = "scholarship";
+                }
+
+                dbContext.SaveChanges();
 
         public async Task UpdateDisciplineAsync(string email, int optionalId)
         {
